@@ -47,16 +47,25 @@ class Service extends Model
         ];
     }
 
+    /**
+     * @return BelongsTo<ServiceCategory, $this>
+     */
     public function category(): BelongsTo
     {
         return $this->belongsTo(ServiceCategory::class, 'service_category_id');
     }
 
+    /**
+     * @return HasMany<ServicePrice, $this>
+     */
     public function prices(): HasMany
     {
         return $this->hasMany(ServicePrice::class)->orderBy('sort_order')->orderBy('id');
     }
 
+    /**
+     * @return BelongsToMany<Specialist, $this>
+     */
     public function specialists(): BelongsToMany
     {
         return $this->belongsToMany(Specialist::class)
@@ -66,18 +75,30 @@ class Service extends Model
             ->orderBy('specialists.id');
     }
 
+    /**
+     * @param  Builder<static>  $query
+     * @return Builder<static>
+     */
     #[Scope]
     protected function active(Builder $query): Builder
     {
         return $query->where('is_active', true);
     }
 
+    /**
+     * @param  Builder<static>  $query
+     * @return Builder<static>
+     */
     #[Scope]
     protected function featured(Builder $query): Builder
     {
         return $query->where('is_featured', true);
     }
 
+    /**
+     * @param  Builder<static>  $query
+     * @return Builder<static>
+     */
     #[Scope]
     protected function ordered(Builder $query): Builder
     {

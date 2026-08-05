@@ -31,17 +31,28 @@ class BlogCategory extends Model
         ];
     }
 
+    /**
+     * @return HasMany<BlogPost, $this>
+     */
     public function posts(): HasMany
     {
         return $this->hasMany(BlogPost::class)->latest('published_at');
     }
 
+    /**
+     * @param  Builder<static>  $query
+     * @return Builder<static>
+     */
     #[Scope]
     protected function active(Builder $query): Builder
     {
         return $query->where('is_active', true);
     }
 
+    /**
+     * @param  Builder<static>  $query
+     * @return Builder<static>
+     */
     #[Scope]
     protected function ordered(Builder $query): Builder
     {

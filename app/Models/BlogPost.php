@@ -33,11 +33,18 @@ class BlogPost extends Model
         ];
     }
 
+    /**
+     * @return BelongsTo<BlogCategory, $this>
+     */
     public function category(): BelongsTo
     {
         return $this->belongsTo(BlogCategory::class, 'blog_category_id');
     }
 
+    /**
+     * @param  Builder<static>  $query
+     * @return Builder<static>
+     */
     #[Scope]
     protected function published(Builder $query): Builder
     {

@@ -30,11 +30,18 @@ class ContactPolicy extends Model
         ];
     }
 
+    /**
+     * @return HasMany<ContactPolicyItem, $this>
+     */
     public function items(): HasMany
     {
         return $this->hasMany(ContactPolicyItem::class)->orderBy('sort_order')->orderBy('id');
     }
 
+    /**
+     * @param  Builder<static>  $query
+     * @return Builder<static>
+     */
     #[Scope]
     protected function active(Builder $query): Builder
     {

@@ -32,11 +32,18 @@ class ContactPolicyItem extends Model
         ];
     }
 
+    /**
+     * @return BelongsTo<ContactPolicy, $this>
+     */
     public function policy(): BelongsTo
     {
         return $this->belongsTo(ContactPolicy::class, 'contact_policy_id');
     }
 
+    /**
+     * @param  Builder<static>  $query
+     * @return Builder<static>
+     */
     #[Scope]
     protected function active(Builder $query): Builder
     {

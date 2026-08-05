@@ -32,6 +32,9 @@ class WaxingItem extends Model
         ];
     }
 
+    /**
+     * @return BelongsTo<WaxingGroup, $this>
+     */
     public function group(): BelongsTo
     {
         return $this->belongsTo(WaxingGroup::class, 'waxing_group_id');

@@ -908,14 +908,27 @@ class ElegantBeautySeeder extends Seeder
             $service->prices()->delete();
 
             foreach ($serviceData['prices'] as $priceIndex => $price) {
+                if (! is_array($price)) {
+                    continue;
+                }
+
+                $priceData = array_replace([
+                    'label' => null,
+                    'amount' => null,
+                    'amount_max' => null,
+                    'display_price' => $serviceData['display_price'],
+                    'duration' => null,
+                    'note' => null,
+                ], $price);
+
                 $service->prices()->create([
-                    'label' => $price['label'] ?? null,
-                    'amount' => $price['amount'] ?? null,
-                    'amount_max' => $price['amount_max'] ?? null,
+                    'label' => $priceData['label'],
+                    'amount' => $priceData['amount'],
+                    'amount_max' => $priceData['amount_max'],
                     'currency' => 'USD',
-                    'display_price' => $price['display_price'] ?? $serviceData['display_price'],
-                    'duration' => $price['duration'] ?? null,
-                    'note' => $price['note'] ?? null,
+                    'display_price' => $priceData['display_price'],
+                    'duration' => $priceData['duration'],
+                    'note' => $priceData['note'],
                     'sort_order' => $priceIndex + 1,
                     'is_primary' => $priceIndex === 0,
                 ]);

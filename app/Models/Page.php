@@ -33,6 +33,10 @@ class Page extends Model
         ];
     }
 
+    /**
+     * @param  Builder<static>  $query
+     * @return Builder<static>
+     */
     #[Scope]
     protected function published(Builder $query): Builder
     {

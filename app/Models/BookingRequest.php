@@ -27,11 +27,17 @@ class BookingRequest extends Model
         'status' => self::StatusPending,
     ];
 
+    /**
+     * @return BelongsTo<Specialist, $this>
+     */
     public function specialist(): BelongsTo
     {
         return $this->belongsTo(Specialist::class);
     }
 
+    /**
+     * @return BelongsTo<Service, $this>
+     */
     public function service(): BelongsTo
     {
         return $this->belongsTo(Service::class);
