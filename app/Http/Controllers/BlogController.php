@@ -29,7 +29,7 @@ class BlogController extends Controller
                 ->with('category')
                 ->published()
                 ->latest('published_at')
-                ->paginate(9),
+                ->paginate(10),
         ]);
     }
 

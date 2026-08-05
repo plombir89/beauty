@@ -55,6 +55,7 @@
                 <div class="flex items-center gap-2 sm:gap-3">
                     @if ($studio?->phone)
                         <a href="{{ $studio->phone_href }}" class="text-ink-soft hover:text-plum-700 hidden items-center gap-2 text-sm font-medium transition-colors xl:inline-flex">
+                            <x-site.contact-icon name="phone" class="size-4" />
                             {{ $studio->phone }}
                         </a>
                     @endif
@@ -120,19 +121,19 @@
             <div class="border-sand-200 mt-8 flex flex-col gap-4 border-t pt-6 text-sm">
                 @if ($studio?->phone)
                     <a href="{{ $studio->phone_href }}" class="text-ink-soft hover:text-plum-700 flex items-center gap-3 transition-colors">
-                        <span class="text-gold-500 shrink-0 text-xs font-semibold uppercase tracking-[0.16em]">Tel</span>
+                        <x-site.contact-icon name="phone" class="text-gold-500 size-4 shrink-0" />
                         {{ $studio->phone }}
                     </a>
                 @endif
                 @if ($studio?->email)
                     <a href="mailto:{{ $studio->email }}" class="text-ink-soft hover:text-plum-700 flex items-center gap-3 transition-colors">
-                        <span class="text-gold-500 shrink-0 text-xs font-semibold uppercase tracking-[0.16em]">Mail</span>
+                        <x-site.contact-icon name="mail" class="text-gold-500 size-4 shrink-0" />
                         <span class="break-all">{{ $studio->email }}</span>
                     </a>
                 @endif
                 @if ($studio?->address)
                     <a href="{{ $studio->maps_url }}" target="_blank" rel="noopener" class="text-ink-soft hover:text-plum-700 flex items-start gap-3 transition-colors">
-                        <span class="text-gold-500 mt-0.5 shrink-0 text-xs font-semibold uppercase tracking-[0.16em]">Map</span>
+                        <x-site.contact-icon name="map" class="text-gold-500 mt-0.5 size-4 shrink-0" />
                         <span>{{ $studio->address }}</span>
                     </a>
                 @endif

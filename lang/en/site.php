@@ -8,7 +8,7 @@ return [
         'about' => 'About',
         'blog' => 'Blog',
         'contact' => 'Contact',
-        'book' => 'Book',
+        'book' => 'Book now',
         'open_menu' => 'Open menu',
         'close_menu' => 'Close menu',
         'change_language' => 'Change language',
@@ -30,6 +30,13 @@ return [
     ],
     'certificates' => [
         'open' => 'Open certificate :number',
+    ],
+    'pagination' => [
+        'navigation' => 'Pagination navigation',
+        'showing' => 'Showing :first to :last of :total results',
+        'previous' => 'Previous page',
+        'next' => 'Next page',
+        'page' => 'Go to page :page',
     ],
     'common' => [
         'book' => 'Book',

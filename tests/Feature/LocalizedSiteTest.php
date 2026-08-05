@@ -52,6 +52,53 @@ test('home page shows six top services', function (): void {
     }
 });
 
+test('scheduled blog posts stay hidden until their publish date', function (): void {
+    $category = BlogCategory::query()->create([
+        'key' => 'scheduled-news',
+        'slug' => ['en' => 'scheduled-news', 'ru' => 'zaplanovannye-novosti'],
+        'title' => ['en' => 'Scheduled news', 'ru' => 'Запланированные новости'],
+        'description' => ['en' => 'Scheduled posts', 'ru' => 'Запланированные публикации'],
+        'sort_order' => 99,
+        'is_active' => true,
+    ]);
+
+    $publishedAt = now()->addDays(3);
+
+    $post = BlogPost::query()->create([
+        'blog_category_id' => $category->id,
+        'slug' => ['en' => 'future-skin-care-news', 'ru' => 'budushchaya-novost-ob-ukhode'],
+        'title' => ['en' => 'Future skin care news', 'ru' => 'Будущая новость об уходе'],
+        'excerpt' => ['en' => 'This post is scheduled.', 'ru' => 'Эта публикация запланирована.'],
+        'body' => ['en' => 'Scheduled body.', 'ru' => 'Запланированный текст.'],
+        'published_at' => $publishedAt,
+        'is_published' => true,
+    ]);
+
+    expect(BlogPost::query()->published()->whereKey($post->id)->exists())->toBeFalse();
+
+    $this->get(route('en.blog.index'))
+        ->assertOk()
+        ->assertDontSee($post->getTranslation('title', 'en'));
+
+    $this->get(route('en.blog.category', ['categorySlug' => $category->getTranslation('slug', 'en')]))
+        ->assertOk()
+        ->assertDontSee($post->getTranslation('title', 'en'));
+
+    $this->get(route('en.blog.show', ['postSlug' => $post->getTranslation('slug', 'en')]))
+        ->assertNotFound();
+
+    $this->travelTo($publishedAt->addMinute());
+
+    $this->get(route('en.blog.category', ['categorySlug' => $category->getTranslation('slug', 'en')]))
+        ->assertOk()
+        ->assertSee($post->getTranslation('title', 'en'));
+
+    $this->get(route('en.blog.show', ['postSlug' => $post->getTranslation('slug', 'en')]))
+        ->assertOk();
+
+    $this->travelBack();
+});
+
 test('service detail does not duplicate pricing blocks or render booking form', function (): void {
     $service = Service::query()
         ->with('prices')

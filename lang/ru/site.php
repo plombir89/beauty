@@ -8,7 +8,7 @@ return [
         'about' => 'О нас',
         'blog' => 'Новости',
         'contact' => 'Контакты',
-        'book' => 'Запись',
+        'book' => 'Записаться',
         'open_menu' => 'Открыть меню',
         'close_menu' => 'Закрыть меню',
         'change_language' => 'Сменить язык',
@@ -30,6 +30,13 @@ return [
     ],
     'certificates' => [
         'open' => 'Открыть сертификат :number',
+    ],
+    'pagination' => [
+        'navigation' => 'Навигация по страницам',
+        'showing' => 'Показано :first-:last из :total',
+        'previous' => 'Предыдущая страница',
+        'next' => 'Следующая страница',
+        'page' => 'Перейти на страницу :page',
     ],
     'common' => [
         'book' => 'Запись',

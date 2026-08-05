@@ -49,7 +49,9 @@
                             <ul class="mt-6 flex flex-col gap-5 text-sm">
                                 <li>
                                     <a href="{{ $studio->phone_href }}" class="group flex items-center gap-4 transition-colors">
-                                        <span class="bg-blush-50 text-plum-600 group-hover:bg-plum-600 grid size-11 shrink-0 place-items-center rounded-2xl transition-colors group-hover:text-white">{{ __('site.common.phone_short') }}</span>
+                                        <span class="bg-blush-50 text-plum-600 group-hover:bg-plum-600 grid size-11 shrink-0 place-items-center rounded-2xl transition-colors group-hover:text-white">
+                                            <x-site.contact-icon name="phone" />
+                                        </span>
                                         <span>
                                             <span class="text-ink-faint block text-xs">{{ __('site.contact.call_us') }}</span>
                                             <span class="text-ink group-hover:text-plum-700 font-medium">{{ $studio->phone }}</span>
@@ -59,7 +61,9 @@
 
                                 <li>
                                     <a href="mailto:{{ $studio->email }}" class="group flex items-center gap-4 transition-colors">
-                                        <span class="bg-blush-50 text-plum-600 group-hover:bg-plum-600 grid size-11 shrink-0 place-items-center rounded-2xl transition-colors group-hover:text-white">@</span>
+                                        <span class="bg-blush-50 text-plum-600 group-hover:bg-plum-600 grid size-11 shrink-0 place-items-center rounded-2xl transition-colors group-hover:text-white">
+                                            <x-site.contact-icon name="mail" />
+                                        </span>
                                         <span class="min-w-0">
                                             <span class="text-ink-faint block text-xs">{{ __('site.contact.write_us') }}</span>
                                             <span class="text-ink group-hover:text-plum-700 font-medium break-all">{{ $studio->email }}</span>
@@ -69,7 +73,9 @@
 
                                 <li>
                                     <a href="{{ $studio->maps_url }}" target="_blank" rel="noopener" class="group flex items-start gap-4 transition-colors">
-                                        <span class="bg-blush-50 text-plum-600 group-hover:bg-plum-600 grid size-11 shrink-0 place-items-center rounded-2xl transition-colors group-hover:text-white">⌖</span>
+                                        <span class="bg-blush-50 text-plum-600 group-hover:bg-plum-600 grid size-11 shrink-0 place-items-center rounded-2xl transition-colors group-hover:text-white">
+                                            <x-site.contact-icon name="map" />
+                                        </span>
                                         <span>
                                             <span class="text-ink-faint block text-xs">{{ __('site.contact.get_directions') }}</span>
                                             <span class="text-ink group-hover:text-plum-700 font-medium">{{ $studio->address }}</span>

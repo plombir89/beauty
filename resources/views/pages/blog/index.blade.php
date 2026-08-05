@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="mt-10">
-                    {{ $posts->links() }}
+                    {{ $posts->onEachSide(1)->links('pagination.site') }}
                 </div>
             </div>
         </div>
