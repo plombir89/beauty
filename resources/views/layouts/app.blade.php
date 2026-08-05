@@ -12,9 +12,11 @@
         @livewireStyles
     </head>
     <body id="top" class="min-h-screen bg-cream text-ink antialiased">
+        @php($isHomePage = request()->routeIs(app()->getLocale().'.home'))
+
         <x-site.header :studio="$layoutStudio ?? null" :alternate-urls="$alternateUrls ?? []" />
 
-        <main id="main">
+        <main id="main" @class(['pt-20' => ! $isHomePage])>
             {{ $slot ?? '' }}
             @yield('content')
         </main>

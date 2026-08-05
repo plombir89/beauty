@@ -192,14 +192,14 @@
             <ul class="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
                 @foreach ($certificates as $certificate)
                     <li>
-                        <a href="{{ asset($certificate->image) }}" target="_blank" rel="noopener" aria-label="{{ $certificate->alt }}" class="group shadow-soft hover:shadow-lift focus-visible:outline-plum-600 block w-full overflow-hidden rounded-3xl bg-white transition-all duration-500 hover:-translate-y-1">
+                        <button type="button" data-lightbox-trigger data-lightbox-gallery="certificates" data-lightbox-src="{{ asset($certificate->image) }}" data-lightbox-alt="{{ $certificate->alt }}" aria-label="{{ __('site.certificates.open', ['number' => $loop->iteration]) }}" class="group shadow-soft hover:shadow-lift focus-visible:outline-plum-600 block w-full overflow-hidden rounded-3xl bg-white transition-all duration-500 hover:-translate-y-1">
                             <span class="relative block">
                                 <img src="{{ asset($certificate->image) }}" alt="" class="aspect-[3/4] w-full object-cover transition-transform duration-700 group-hover:scale-105">
                                 <span class="bg-plum-900/0 group-hover:bg-plum-900/30 absolute inset-0 grid place-items-center transition-colors duration-300">
                                     <span class="text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">↗</span>
                                 </span>
                             </span>
-                        </a>
+                        </button>
                     </li>
                 @endforeach
             </ul>

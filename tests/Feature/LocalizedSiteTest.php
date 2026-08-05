@@ -51,3 +51,19 @@ test('home page shows six top services', function (): void {
         $response->assertSee($service->getTranslation('title', 'en'));
     }
 });
+
+test('service detail does not duplicate pricing blocks or render booking form', function (): void {
+    $service = Service::query()
+        ->with('prices')
+        ->whereHas('prices')
+        ->active()
+        ->firstOrFail();
+
+    $response = $this->get(route('en.services.show', ['serviceSlug' => $service->getTranslation('slug', 'en')]))
+        ->assertOk();
+
+    $response
+        ->assertDontSee(__('site.booking.title'))
+        ->assertDontSee(__('site.booking.intro'))
+        ->assertDontSee('<h2 class="text-2xl font-medium">'.__('site.common.price').'</h2>', false);
+});

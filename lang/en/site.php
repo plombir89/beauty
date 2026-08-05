@@ -27,6 +27,9 @@ return [
         'expertise_title' => 'Thoughtful care for skin, brows, hair and body',
         'top_services_subtitle' => 'The most requested treatments from the studio menu.',
     ],
+    'certificates' => [
+        'open' => 'Open certificate :number',
+    ],
     'common' => [
         'book' => 'Book',
         'book_now' => 'Book now',

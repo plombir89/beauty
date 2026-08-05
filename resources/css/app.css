@@ -110,6 +110,82 @@
     .btn-gold {
         @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold-500 px-6 py-3 text-sm font-medium tracking-wide text-white shadow-soft transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-gold-600 hover:shadow-lift;
     }
+
+    .lightbox-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 80;
+        display: none;
+        place-items: center;
+        background: rgb(47 24 51 / 0.9);
+        padding: 1rem;
+        backdrop-filter: blur(12px);
+    }
+
+    .lightbox-backdrop.is-open {
+        display: grid;
+    }
+
+    .lightbox-panel {
+        position: relative;
+        display: grid;
+        max-height: min(90vh, 56rem);
+        width: min(100%, 64rem);
+        gap: 1rem;
+    }
+
+    .lightbox-image {
+        max-height: min(82vh, 50rem);
+        width: 100%;
+        object-fit: contain;
+        border-radius: 2rem;
+        box-shadow: var(--shadow-lift);
+    }
+
+    .lightbox-control {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgb(255 255 255 / 0.2);
+        border-radius: 9999px;
+        background: rgb(255 255 255 / 0.1);
+        color: white;
+        transition: background-color 200ms ease, border-color 200ms ease;
+    }
+
+    .lightbox-control:hover {
+        border-color: rgb(255 255 255 / 0.5);
+        background: rgb(255 255 255 / 0.18);
+    }
+
+    .lightbox-close {
+        position: absolute;
+        right: 0;
+        top: -3rem;
+        height: 2.5rem;
+        padding-inline: 1rem;
+        font-size: 0.875rem;
+    }
+
+    .lightbox-nav {
+        height: 3rem;
+        width: 3rem;
+        font-size: 1.5rem;
+    }
+
+    .lightbox-nav-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .lightbox-counter {
+        color: rgb(255 255 255 / 0.7);
+        font-size: 0.75rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
 }
 
 @layer utilities {

@@ -17,7 +17,7 @@
     {{ __('site.nav.skip_to_content') }}
 </a>
 
-<header x-data="{ open: false, scrolled: window.scrollY > 16 }" x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 16 }, { passive: true })" class="fixed inset-x-0 top-0 z-50 transition-all duration-500" :class="scrolled ? 'border-sand-100 border-b bg-cream/85 py-2 shadow-[0_8px_32px_-24px_rgb(42_31_40/0.5)] backdrop-blur-xl' : 'border-b border-transparent py-4'">
+<header x-data="{ open: false, scrolled: window.scrollY > 16 }" x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 16 }, { passive: true })" class="border-sand-100 fixed inset-x-0 top-0 z-50 border-b bg-cream/85 backdrop-blur-xl transition-all duration-500" :class="scrolled ? 'py-2 shadow-[0_8px_32px_-24px_rgb(42_31_40/0.5)]' : 'py-4'">
     <div class="mx-auto w-full max-w-7xl px-5 sm:px-8">
         <div class="flex items-center justify-between gap-4">
             <a href="{{ route($locale.'.home') }}" class="group flex items-center gap-3" aria-label="Elegant Beauty Studio">

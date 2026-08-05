@@ -50,20 +50,6 @@
                         <p class="copy mt-7 text-[0.95rem]">{{ $service->details }}</p>
                     @endif
 
-                    @if ($service->prices->isNotEmpty())
-                        <div class="border-sand-100 shadow-soft mt-8 rounded-4xl border bg-white p-6">
-                            <h2 class="text-2xl font-medium">{{ __('site.common.price') }}</h2>
-                            <ul class="mt-5 flex flex-col">
-                                @foreach ($service->prices as $price)
-                                    <li class="border-sand-100 flex items-baseline justify-between gap-4 border-b py-2.5 last:border-b-0">
-                                        <span class="text-ink-soft text-sm">{{ $price->label }}</span>
-                                        <span class="text-plum-900 text-sm font-semibold tabular-nums">{{ $price->display_price }}</span>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
                     <h2 class="mt-9 inline-flex items-center gap-3 text-2xl font-medium">{{ __('site.common.benefits') }}</h2>
 
                     <ul class="mt-5 flex flex-col gap-3">
@@ -95,17 +81,6 @@
             </div>
         </div>
     </div>
-
-    <section class="py-20">
-        <div class="mx-auto grid w-full max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-[0.95fr_1.05fr]">
-            <div>
-                <span class="eyebrow inline-flex items-center gap-3"><span aria-hidden="true" class="h-px w-8 bg-gold-400"></span>{{ __('site.common.book') }}</span>
-                <h2 class="mt-3 text-3xl font-light sm:text-4xl">{{ __('site.booking.title') }}</h2>
-                <p class="text-ink-soft mt-4 leading-relaxed">{{ __('site.booking.intro') }}</p>
-            </div>
-            <livewire:booking-form :initial-service-id="$service->id" />
-        </div>
-    </section>
 
     @if ($relatedServices->isNotEmpty())
         <section class="bg-sand-50 py-20">
