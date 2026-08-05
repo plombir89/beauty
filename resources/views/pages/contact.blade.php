@@ -97,7 +97,9 @@
                                 <div class="border-sand-100 mt-7 border-t pt-6">
                                     <div class="flex flex-wrap gap-2">
                                         @foreach ($socialLinks as $socialLink)
-                                            <a href="{{ $socialLink->href }}" class="border-sand-200 text-ink-soft hover:border-plum-400 hover:text-plum-700 rounded-full border px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em]" target="_blank" rel="noopener">{{ $socialLink->label }}</a>
+                                            <a href="{{ $socialLink->href }}" aria-label="{{ $socialLink->label }}" class="bg-sand-100 text-plum-700 hover:bg-plum-600 grid size-10 place-items-center rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:text-white" target="_blank" rel="noopener">
+                                                <x-site.social-icon :name="$socialLink->key" />
+                                            </a>
                                         @endforeach
                                     </div>
                                 </div>

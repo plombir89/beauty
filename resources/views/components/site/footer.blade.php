@@ -23,8 +23,8 @@
                 </p>
                 <div class="mt-6 flex flex-wrap gap-2">
                     @foreach ($socialLinks as $socialLink)
-                        <a href="{{ $socialLink->href }}" class="grid size-10 place-items-center rounded-full border border-white/10 text-xs font-semibold text-white/70 transition-colors hover:border-gold-300 hover:text-white" target="_blank" rel="noopener">
-                            {{ mb_substr($socialLink->label, 0, 1) }}
+                        <a href="{{ $socialLink->href }}" aria-label="{{ $socialLink->label }}" class="grid size-10 place-items-center rounded-full bg-white/10 text-white/80 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-plum-700" target="_blank" rel="noopener">
+                            <x-site.social-icon :name="$socialLink->key" />
                         </a>
                     @endforeach
                 </div>

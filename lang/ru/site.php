@@ -10,6 +10,7 @@ return [
         'contact' => 'Контакты',
         'book' => 'Запись',
         'open_menu' => 'Открыть меню',
+        'close_menu' => 'Закрыть меню',
         'change_language' => 'Сменить язык',
         'skip_to_content' => 'Перейти к содержимому',
     ],

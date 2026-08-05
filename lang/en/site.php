@@ -10,6 +10,7 @@ return [
         'contact' => 'Contact',
         'book' => 'Book',
         'open_menu' => 'Open menu',
+        'close_menu' => 'Close menu',
         'change_language' => 'Change language',
         'skip_to_content' => 'Skip to content',
     ],
