@@ -2,8 +2,10 @@
 
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
+use App\Models\CtaBlock;
 use App\Models\ExpertisePillar;
 use App\Models\Service;
+use App\Models\StudioProfile;
 use App\Models\WhyChooseUsItem;
 use Database\Seeders\ElegantBeautySeeder;
 
@@ -51,6 +53,21 @@ test('home page shows six top services', function (): void {
     foreach ($topServices as $service) {
         $response->assertSee($service->getTranslation('title', 'en'));
     }
+});
+
+test('home page shows the main CTA block', function (): void {
+    $ctaBlock = CtaBlock::query()->where('key', 'main')->firstOrFail();
+    $studio = StudioProfile::query()->active()->firstOrFail();
+
+    $this->get('/en')
+        ->assertOk()
+        ->assertSee($ctaBlock->getTranslation('text', 'en'))
+        ->assertSee($ctaBlock->getTranslation('primary_label', 'en'))
+        ->assertSeeInOrder([
+            $ctaBlock->getTranslation('text', 'en'),
+            'href="'.$studio->phone_href.'"',
+            'Call '.$studio->phone,
+        ], false);
 });
 
 test('home page hides expertise block when no expertise pillars are visible', function (): void {

@@ -9,6 +9,7 @@ use App\Models\ExpertisePillar;
 use App\Models\HomeHeroBlock;
 use App\Models\Page;
 use App\Models\Service;
+use App\Models\StudioProfile;
 use App\Models\WhyChooseUsItem;
 use App\Support\LocalizedRoutes;
 use App\Support\Seo;
@@ -42,7 +43,8 @@ class HomeController extends Controller
                 ->get(),
             'aboutTeaser' => AboutTeaser::active()->where('key', 'home')->first(),
             'certificates' => Certificate::active()->ordered()->get(),
-            'ctaBlock' => CtaBlock::active()->where('key', 'home')->first(),
+            'ctaBlock' => CtaBlock::active()->where('key', 'main')->first(),
+            'studio' => StudioProfile::active()->first(),
         ]);
     }
 }

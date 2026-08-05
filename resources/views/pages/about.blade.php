@@ -57,6 +57,6 @@
     </section>
 
     <div class="pt-20">
-        <x-cta-block :block="$ctaBlock" />
+        <x-cta-block :block="$ctaBlock" :studio="$studio" />
     </div>
 @endsection

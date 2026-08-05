@@ -437,10 +437,13 @@ class ElegantBeautySeeder extends Seeder
         CtaBlock::query()->updateOrCreate(
             ['key' => 'main'],
             [
-                'title' => ['en' => 'Ready when you are', 'ru' => 'Мы готовы, когда удобно вам'],
+                'title' => [
+                    'en' => 'Book your appointment now and take the first step toward a more confident, beautiful you.',
+                    'ru' => 'Запишитесь на приём сейчас и сделайте первый шаг к более уверенной и красивой себе.',
+                ],
                 'text' => [
-                    'en' => 'Tell us what bothers you - we will suggest the treatment that actually fits your skin, your budget and your schedule.',
-                    'ru' => 'Расскажите, что вас беспокоит - мы подберём процедуру, которая подойдёт вашей коже, бюджету и графику.',
+                    'en' => 'Book your appointment now and take the first step toward a more confident, beautiful you.',
+                    'ru' => 'Запишитесь на приём сейчас и сделайте первый шаг к более уверенной и красивой себе.',
                 ],
                 'primary_label' => ['en' => 'Book an appointment', 'ru' => 'Записаться на приём'],
                 'secondary_label' => ['en' => 'Call :phone', 'ru' => 'Позвонить :phone'],

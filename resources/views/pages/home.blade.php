@@ -208,5 +208,5 @@
         </div>
     </section>
 
-    <x-cta-block :block="$ctaBlock" />
+    <x-cta-block :block="$ctaBlock" :studio="$studio" />
 @endsection

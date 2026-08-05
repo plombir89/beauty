@@ -6,6 +6,7 @@ use App\Models\AboutPageContent;
 use App\Models\AboutValue;
 use App\Models\CtaBlock;
 use App\Models\Page;
+use App\Models\StudioProfile;
 use App\Support\LocalizedRoutes;
 use App\Support\Seo;
 use Illuminate\Contracts\View\View;
@@ -28,6 +29,7 @@ class AboutController extends Controller
             'content' => AboutPageContent::active()->where('key', 'main')->first(),
             'values' => AboutValue::active()->ordered()->get(),
             'ctaBlock' => CtaBlock::active()->where('key', 'about')->first(),
+            'studio' => StudioProfile::active()->first(),
         ]);
     }
 }
