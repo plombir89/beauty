@@ -191,44 +191,60 @@
         @apply text-ink-soft text-lg leading-relaxed;
     }
 
-    .blog-rich-content > * + * {
+    .service-rich-content {
+        @apply text-ink-soft leading-relaxed;
+        font-size: 0.95rem;
+    }
+
+    .blog-rich-content > * + *,
+    .service-rich-content > * + * {
         margin-top: 1.25rem;
     }
 
-    .blog-rich-content h2 {
+    .blog-rich-content h2,
+    .service-rich-content h2 {
         @apply text-3xl font-light leading-tight;
     }
 
-    .blog-rich-content h3 {
+    .blog-rich-content h3,
+    .service-rich-content h3 {
         @apply text-2xl font-medium leading-snug;
     }
 
-    .blog-rich-content h4 {
+    .blog-rich-content h4,
+    .service-rich-content h4 {
         @apply text-xl font-medium leading-snug;
     }
 
     .blog-rich-content ul,
-    .blog-rich-content ol {
+    .blog-rich-content ol,
+    .service-rich-content ul,
+    .service-rich-content ol {
         @apply grid gap-2 pl-6;
     }
 
-    .blog-rich-content ul {
+    .blog-rich-content ul,
+    .service-rich-content ul {
         list-style: disc;
     }
 
-    .blog-rich-content ol {
+    .blog-rich-content ol,
+    .service-rich-content ol {
         list-style: decimal;
     }
 
-    .blog-rich-content a:not(.youtube-video-block) {
+    .blog-rich-content a:not(.youtube-video-block),
+    .service-rich-content a:not(.youtube-video-block) {
         @apply text-plum-700 underline decoration-plum-200 underline-offset-4 transition-colors hover:text-plum-900;
     }
 
-    .blog-youtube-video {
+    .blog-youtube-video,
+    .site-youtube-video {
         @apply shadow-soft my-8 aspect-video overflow-hidden rounded-3xl bg-plum-900;
     }
 
-    .blog-youtube-video iframe {
+    .blog-youtube-video iframe,
+    .site-youtube-video iframe {
         @apply h-full w-full;
     }
 }

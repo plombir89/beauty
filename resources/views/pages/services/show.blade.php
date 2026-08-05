@@ -47,7 +47,9 @@
                     </div>
 
                     @if ($service->details)
-                        <p class="copy mt-7 text-[0.95rem]">{{ $service->details }}</p>
+                        <div class="service-rich-content mt-7">
+                            {{ \App\Support\SiteRichContentRenderer::render($service->details) }}
+                        </div>
                     @endif
 
                     <h2 class="mt-9 inline-flex items-center gap-3 text-2xl font-medium">{{ __('site.common.benefits') }}</h2>

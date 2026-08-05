@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Services;
 
+use App\Filament\Forms\Components\RichEditor\RichContentCustomBlocks\YouTubeVideoBlock;
 use App\Filament\Resources\Services\Pages\CreateService;
 use App\Filament\Resources\Services\Pages\EditService;
 use App\Filament\Resources\Services\Pages\ListServices;
@@ -74,14 +75,14 @@ class ServiceResource extends Resource
                     ])
                     ->columns(3),
                 Fields::translations([
+                    ['name' => 'title', 'label' => 'Title', 'required' => true, 'slugTarget' => 'slug'],
                     ['name' => 'slug', 'label' => 'Slug', 'required' => true],
-                    ['name' => 'title', 'label' => 'Title', 'required' => true],
                     ['name' => 'display_price', 'label' => 'Display price', 'type' => 'textarea', 'rows' => 3, 'full' => true],
                     ['name' => 'duration', 'label' => 'Duration'],
                     ['name' => 'skin_type', 'label' => 'Skin type'],
                     ['name' => 'summary', 'label' => 'Summary', 'type' => 'textarea', 'rows' => 3, 'required' => true, 'full' => true],
                     ['name' => 'benefits', 'label' => 'Benefits', 'type' => 'lines', 'rows' => 6],
-                    ['name' => 'details', 'label' => 'Details', 'type' => 'textarea', 'rows' => 4, 'full' => true],
+                    ['name' => 'details', 'label' => 'Details', 'type' => 'rich-editor', 'full' => true, 'fileAttachmentsDirectory' => 'img/uploads/services/content', 'customBlocks' => [YouTubeVideoBlock::class]],
                     ['name' => 'note', 'label' => 'Note', 'type' => 'textarea', 'rows' => 3, 'full' => true],
                 ]),
                 Repeater::make('prices')

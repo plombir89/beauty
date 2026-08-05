@@ -53,8 +53,8 @@ class ServiceCategoryResource extends Resource
                     ->default(true)
                     ->required(),
                 Fields::translations([
+                    ['name' => 'title', 'label' => 'Title', 'required' => true, 'slugTarget' => 'slug'],
                     ['name' => 'slug', 'label' => 'Slug', 'required' => true],
-                    ['name' => 'title', 'label' => 'Title', 'required' => true],
                     ['name' => 'description', 'label' => 'Description', 'type' => 'textarea', 'rows' => 3, 'full' => true],
                 ]),
             ])
