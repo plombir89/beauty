@@ -4,5 +4,139 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-display: 'Cormorant Garamond', ui-serif, Georgia, Cambria, 'Times New Roman', serif;
+
+    --color-cream: #fdfaf8;
+    --color-sand-50: #faf4ef;
+    --color-sand-100: #f4eae1;
+    --color-sand-200: #e9d9cb;
+    --color-sand-300: #dcc4b0;
+
+    --color-blush-50: #fdf5f4;
+    --color-blush-100: #f9e6e4;
+    --color-blush-200: #f2cfcb;
+    --color-blush-300: #e7b0aa;
+    --color-blush-400: #d78c84;
+    --color-blush-500: #c26c64;
+
+    --color-plum-50: #f7f2f8;
+    --color-plum-100: #ede1ef;
+    --color-plum-200: #dcc5e0;
+    --color-plum-400: #9c6ba3;
+    --color-plum-600: #6e3974;
+    --color-plum-700: #572c5c;
+    --color-plum-900: #2f1833;
+
+    --color-gold-300: #d9bd93;
+    --color-gold-400: #c6a375;
+    --color-gold-500: #b08959;
+    --color-gold-600: #8f6d45;
+
+    --color-ink: #2a1f28;
+    --color-ink-soft: #6d5f6a;
+    --color-ink-faint: #9c8f98;
+
+    --radius-4xl: 2rem;
+    --radius-5xl: 2.75rem;
+
+    --shadow-soft: 0 1px 2px rgb(42 31 40 / 0.04), 0 12px 32px -12px rgb(42 31 40 / 0.12);
+    --shadow-lift: 0 2px 4px rgb(42 31 40 / 0.05), 0 24px 48px -18px rgb(42 31 40 / 0.22);
+
+    --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+    * {
+        min-width: 0;
+    }
+
+    html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        @apply bg-cream text-ink font-sans antialiased;
+        text-rendering: optimizeLegibility;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        @apply font-display text-plum-900;
+        text-wrap: balance;
+    }
+
+    p {
+        text-wrap: pretty;
+    }
+
+    :focus-visible {
+        @apply outline-2 outline-offset-3 outline-plum-600;
+    }
+
+    [id] {
+        scroll-margin-top: 6.5rem;
+    }
+
+    ::selection {
+        @apply bg-blush-200 text-plum-900;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+}
+
+@layer components {
+    .eyebrow {
+        @apply text-gold-600 text-xs font-semibold tracking-[0.22em] uppercase;
+    }
+
+    .copy {
+        @apply text-ink-soft leading-relaxed whitespace-pre-line;
+    }
+
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2 rounded-full bg-plum-600 px-6 py-3 text-sm font-medium tracking-wide text-white shadow-soft transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-plum-700 hover:shadow-lift;
+    }
+
+    .btn-secondary {
+        @apply inline-flex items-center justify-center gap-2 rounded-full border border-plum-200 bg-white/80 px-6 py-3 text-sm font-medium tracking-wide text-plum-700 backdrop-blur transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-plum-400 hover:bg-white;
+    }
+
+    .btn-gold {
+        @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold-500 px-6 py-3 text-sm font-medium tracking-wide text-white shadow-soft transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-gold-600 hover:shadow-lift;
+    }
+}
+
+@layer utilities {
+    .text-shadow-hero {
+        text-shadow: 0 2px 24px rgb(47 24 51 / 0.35);
+    }
+
+    .grain {
+        background-image: radial-gradient(
+            circle at 1px 1px,
+            rgb(176 137 89 / 0.16) 1px,
+            transparent 0
+        );
+        background-size: 22px 22px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }

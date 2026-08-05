@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'studio' => [
+        'booking_email' => env('STUDIO_BOOKING_EMAIL', 'elegantbrowsss@gmail.com'),
+    ],
+
 ];
