@@ -2,6 +2,7 @@
 
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
+use App\Models\ExpertisePillar;
 use App\Models\Service;
 use App\Models\WhyChooseUsItem;
 use Database\Seeders\ElegantBeautySeeder;
@@ -50,6 +51,15 @@ test('home page shows six top services', function (): void {
     foreach ($topServices as $service) {
         $response->assertSee($service->getTranslation('title', 'en'));
     }
+});
+
+test('home page hides expertise block when no expertise pillars are visible', function (): void {
+    ExpertisePillar::query()->update(['is_active' => false]);
+
+    $this->get('/en')
+        ->assertOk()
+        ->assertDontSee(__('site.common.expertise'))
+        ->assertDontSee(__('site.home.expertise_title'));
 });
 
 test('scheduled blog posts stay hidden until their publish date', function (): void {

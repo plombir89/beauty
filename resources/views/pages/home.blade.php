@@ -72,45 +72,47 @@
         </div>
     </section>
 
-    <section class="py-20 sm:py-28">
-        <div class="mx-auto w-full max-w-7xl px-5 sm:px-8">
-            <div class="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center">
-                <span class="eyebrow inline-flex items-center gap-3"><span aria-hidden="true" class="h-px w-8 bg-gold-400"></span>{{ __('site.common.expertise') }}</span>
-                <h2 class="text-4xl font-light leading-[1.1] sm:text-5xl">{{ __('site.home.expertise_title') }}</h2>
-                <p class="text-ink-soft text-base leading-relaxed sm:text-lg">{{ $page->subtitle }}</p>
-            </div>
+    @if ($expertisePillars->isNotEmpty())
+        <section class="py-20 sm:py-28">
+            <div class="mx-auto w-full max-w-7xl px-5 sm:px-8">
+                <div class="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center">
+                    <span class="eyebrow inline-flex items-center gap-3"><span aria-hidden="true" class="h-px w-8 bg-gold-400"></span>{{ __('site.common.expertise') }}</span>
+                    <h2 class="text-4xl font-light leading-[1.1] sm:text-5xl">{{ __('site.home.expertise_title') }}</h2>
+                    <p class="text-ink-soft text-base leading-relaxed sm:text-lg">{{ $page->subtitle }}</p>
+                </div>
 
-            <div class="mt-14 grid gap-6 lg:grid-cols-3">
-                @foreach ($expertisePillars as $pillar)
-                    <article class="border-sand-100 shadow-soft hover:shadow-lift flex h-full flex-col overflow-hidden rounded-4xl border bg-white transition-shadow duration-500">
-                        @if ($pillar->image)
-                            <img src="{{ asset($pillar->image) }}" alt="" class="aspect-[16/10] w-full object-cover">
-                        @endif
-
-                        <div class="flex flex-1 flex-col p-7">
-                            <span class="bg-plum-50 text-plum-600 grid size-11 place-items-center rounded-2xl">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-
-                            <h3 class="mt-5 text-2xl font-medium">{{ $pillar->title }}</h3>
-                            <p class="text-ink-soft mt-3 text-sm leading-relaxed">{{ $pillar->intro }}</p>
-
-                            <ul class="mt-5 flex flex-col gap-2.5">
-                                @foreach ((array) $pillar->items as $item)
-                                    <li class="flex gap-3 text-sm leading-snug">
-                                        <span class="text-gold-500 mt-0.5 shrink-0">✓</span>
-                                        <span class="text-ink-soft">{{ $item }}</span>
-                                    </li>
-                                @endforeach
-                            </ul>
-
-                            @if ($pillar->note)
-                                <p class="border-sand-100 text-ink-faint mt-auto border-t pt-5 text-xs italic">{{ $pillar->note }}</p>
+                <div class="mt-14 grid gap-6 lg:grid-cols-3">
+                    @foreach ($expertisePillars as $pillar)
+                        <article class="border-sand-100 shadow-soft hover:shadow-lift flex h-full flex-col overflow-hidden rounded-4xl border bg-white transition-shadow duration-500">
+                            @if ($pillar->image)
+                                <img src="{{ asset($pillar->image) }}" alt="" class="aspect-[16/10] w-full object-cover">
                             @endif
-                        </div>
-                    </article>
-                @endforeach
+
+                            <div class="flex flex-1 flex-col p-7">
+                                <span class="bg-plum-50 text-plum-600 grid size-11 place-items-center rounded-2xl">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+
+                                <h3 class="mt-5 text-2xl font-medium">{{ $pillar->title }}</h3>
+                                <p class="text-ink-soft mt-3 text-sm leading-relaxed">{{ $pillar->intro }}</p>
+
+                                <ul class="mt-5 flex flex-col gap-2.5">
+                                    @foreach ((array) $pillar->items as $item)
+                                        <li class="flex gap-3 text-sm leading-snug">
+                                            <span class="text-gold-500 mt-0.5 shrink-0">✓</span>
+                                            <span class="text-ink-soft">{{ $item }}</span>
+                                        </li>
+                                    @endforeach
+                                </ul>
+
+                                @if ($pillar->note)
+                                    <p class="border-sand-100 text-ink-faint mt-auto border-t pt-5 text-xs italic">{{ $pillar->note }}</p>
+                                @endif
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
     <section class="bg-sand-50 py-20 sm:py-28">
         <div class="mx-auto w-full max-w-7xl px-5 sm:px-8">
