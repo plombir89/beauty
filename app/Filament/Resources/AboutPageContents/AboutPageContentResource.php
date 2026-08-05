@@ -2,14 +2,11 @@
 
 namespace App\Filament\Resources\AboutPageContents;
 
-use App\Filament\Resources\AboutPageContents\Pages\CreateAboutPageContent;
 use App\Filament\Resources\AboutPageContents\Pages\EditAboutPageContent;
 use App\Filament\Resources\AboutPageContents\Pages\ListAboutPageContents;
 use App\Filament\Support\Fields;
 use App\Models\AboutPageContent;
 use BackedEnum;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -20,6 +17,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use UnitEnum;
 
 class AboutPageContentResource extends Resource
@@ -37,6 +35,21 @@ class AboutPageContentResource extends Resource
     protected static ?string $pluralModelLabel = 'about page content';
 
     protected static ?string $recordTitleAttribute = 'title';
+
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return false;
+    }
 
     public static function form(Schema $schema): Schema
     {
@@ -77,11 +90,6 @@ class AboutPageContentResource extends Resource
             ])
             ->recordActions([
                 EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
@@ -89,7 +97,6 @@ class AboutPageContentResource extends Resource
     {
         return [
             'index' => ListAboutPageContents::route('/'),
-            'create' => CreateAboutPageContent::route('/create'),
             'edit' => EditAboutPageContent::route('/{record}/edit'),
         ];
     }

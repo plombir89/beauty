@@ -408,7 +408,7 @@ class ElegantBeautySeeder extends Seeder
                     'ru' => 'Мы - команда, которая стремится помогать людям, используя свои знания и опыт. Мы ценим честность и открытость и постоянно развиваемся, чтобы каждый, кто к нам обращается, чувствовал поддержку. Наша цель - создать пространство, где каждый найдёт решение.',
                 ],
                 'cta_label' => ['en' => 'Read our story', 'ru' => 'Наша история'],
-                'image' => '/img/title-img.png',
+                'image' => 'img/uploads/about/title-img.png',
                 'is_active' => true,
             ],
         );
@@ -1107,8 +1107,8 @@ class ElegantBeautySeeder extends Seeder
                 'title' => ['en' => 'How to prepare for a facial', 'ru' => 'Как подготовиться к уходу за лицом'],
                 'excerpt' => ['en' => 'Simple steps that help your appointment go smoothly.', 'ru' => 'Простые шаги, чтобы процедура прошла спокойно и эффективно.'],
                 'body' => [
-                    'en' => ['Avoid strong exfoliants before your visit, arrive with clean skin if possible, and tell your specialist about active products or medications.'],
-                    'ru' => ['Избегайте сильных эксфолиантов перед визитом, по возможности приходите с чистой кожей и расскажите специалисту об активных средствах или препаратах.'],
+                    'en' => '<p>Avoid strong exfoliants before your visit, arrive with clean skin if possible, and tell your specialist about active products or medications.</p>',
+                    'ru' => '<p>Избегайте сильных эксфолиантов перед визитом, по возможности приходите с чистой кожей и расскажите специалисту об активных средствах или препаратах.</p>',
                 ],
                 'image' => '/img/home/products.jpg',
             ],
@@ -1118,8 +1118,8 @@ class ElegantBeautySeeder extends Seeder
                 'title' => ['en' => 'Why consistency matters in acne care', 'ru' => 'Почему важна регулярность при акне'],
                 'excerpt' => ['en' => 'Clear skin is a strategy, not a single appointment.', 'ru' => 'Чистая кожа - это стратегия, а не один визит.'],
                 'body' => [
-                    'en' => ['Acne care works best when clinic treatments, home skincare and follow-up communication support the same plan over time.'],
-                    'ru' => ['Уход при акне работает лучше всего, когда процедуры, домашний уход и связь со специалистом поддерживают один план во времени.'],
+                    'en' => '<p>Acne care works best when clinic treatments, home skincare and follow-up communication support the same plan over time.</p>',
+                    'ru' => '<p>Уход при акне работает лучше всего, когда процедуры, домашний уход и связь со специалистом поддерживают один план во времени.</p>',
                 ],
                 'image' => '/img/services/pro-acneProgram.jpg',
             ],
@@ -1129,8 +1129,8 @@ class ElegantBeautySeeder extends Seeder
                 'title' => ['en' => 'Booking policy reminder', 'ru' => 'Напоминание о правилах записи'],
                 'excerpt' => ['en' => 'A quick note about deposits, late arrivals and rescheduling.', 'ru' => 'Коротко о депозите, опозданиях и переносе записи.'],
                 'body' => [
-                    'en' => ['A non-refundable deposit secures your appointment and is deducted from the procedure price. Please give at least 48 hours notice to reschedule.'],
-                    'ru' => ['Невозвратный депозит закрепляет время и вычитается из стоимости процедуры. Пожалуйста, предупреждайте о переносе минимум за 48 часов.'],
+                    'en' => '<p>A non-refundable deposit secures your appointment and is deducted from the procedure price. Please give at least 48 hours notice to reschedule.</p>',
+                    'ru' => '<p>Невозвратный депозит закрепляет время и вычитается из стоимости процедуры. Пожалуйста, предупреждайте о переносе минимум за 48 часов.</p>',
                 ],
                 'image' => '/img/9.jpg',
             ],

@@ -2,14 +2,11 @@
 
 namespace App\Filament\Resources\AboutTeasers;
 
-use App\Filament\Resources\AboutTeasers\Pages\CreateAboutTeaser;
 use App\Filament\Resources\AboutTeasers\Pages\EditAboutTeaser;
 use App\Filament\Resources\AboutTeasers\Pages\ListAboutTeasers;
 use App\Filament\Support\Fields;
 use App\Models\AboutTeaser;
 use BackedEnum;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -20,6 +17,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use UnitEnum;
 
 class AboutTeaserResource extends Resource
@@ -38,6 +36,21 @@ class AboutTeaserResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'title';
 
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return false;
+    }
+
     public static function form(Schema $schema): Schema
     {
         return $schema
@@ -48,7 +61,8 @@ class AboutTeaserResource extends Resource
                 Toggle::make('is_active')
                     ->default(true)
                     ->required(),
-                Fields::imageUpload('image', 'img/uploads/about'),
+                Fields::imageUpload('image', 'img/uploads/about')
+                    ->columnSpan(1),
                 Fields::translations([
                     ['name' => 'eyebrow', 'label' => 'Eyebrow'],
                     ['name' => 'title', 'label' => 'Title', 'required' => true],
@@ -56,7 +70,7 @@ class AboutTeaserResource extends Resource
                     ['name' => 'cta_label', 'label' => 'CTA label'],
                 ]),
             ])
-            ->columns(2);
+            ->columns(3);
     }
 
     public static function table(Table $table): Table
@@ -76,11 +90,6 @@ class AboutTeaserResource extends Resource
             ])
             ->recordActions([
                 EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
@@ -88,7 +97,6 @@ class AboutTeaserResource extends Resource
     {
         return [
             'index' => ListAboutTeasers::route('/'),
-            'create' => CreateAboutTeaser::route('/create'),
             'edit' => EditAboutTeaser::route('/{record}/edit'),
         ];
     }

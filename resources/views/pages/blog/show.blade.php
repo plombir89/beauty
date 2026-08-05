@@ -29,10 +29,8 @@
     <section class="py-16 sm:py-20">
         <div class="mx-auto grid w-full max-w-7xl gap-10 px-5 sm:px-8 lg:grid-cols-[minmax(0,1fr)_22rem]">
             <article class="border-sand-100 shadow-soft rounded-4xl border bg-white p-6 sm:p-8">
-                <div class="grid gap-5 text-lg leading-relaxed text-ink-soft">
-                    @foreach ((array) $post->body as $paragraph)
-                        <p>{{ $paragraph }}</p>
-                    @endforeach
+                <div class="blog-rich-content">
+                    {{ \App\Support\BlogRichContentRenderer::render($post->body) }}
                 </div>
             </article>
 

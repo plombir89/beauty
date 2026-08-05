@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\AboutTeasers\Pages;
 
 use App\Filament\Resources\AboutTeasers\AboutTeaserResource;
-use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListAboutTeasers extends ListRecords
@@ -12,8 +11,6 @@ class ListAboutTeasers extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        return [
-            CreateAction::make(),
-        ];
+        return [];
     }
 }

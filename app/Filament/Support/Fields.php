@@ -3,12 +3,15 @@
 namespace App\Filament\Support;
 
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Component;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Tables\Columns\ImageColumn;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
@@ -132,6 +135,7 @@ class Fields
         $component = match ($type) {
             'lines' => self::linesTextarea($name, $label, (int) ($field['rows'] ?? 6)),
             'pairs' => self::pairsTextarea($name, $label, (int) ($field['rows'] ?? 4)),
+            'rich-editor' => self::richEditor($name, $label, $field),
             'textarea' => Textarea::make($name)
                 ->label($label)
                 ->rows((int) ($field['rows'] ?? 4))
@@ -155,7 +159,47 @@ class Fields
             $component->maxLength((int) $field['maxLength']);
         }
 
+        if ($component instanceof TextInput && isset($field['slugTarget'])) {
+            self::configureSlugGeneration($component, (string) $field['slugTarget'], $locale);
+        }
+
         return $component;
+    }
+
+    /**
+     * @param  array<string, mixed>  $field
+     */
+    private static function richEditor(string $name, string $label, array $field): RichEditor
+    {
+        $component = RichEditor::make($name)
+            ->label($label)
+            ->fileAttachmentsDisk('public_uploads')
+            ->fileAttachmentsDirectory((string) ($field['fileAttachmentsDirectory'] ?? 'img/uploads/rich-content'))
+            ->fileAttachmentsVisibility('public');
+
+        if (isset($field['customBlocks']) && is_array($field['customBlocks'])) {
+            $component->customBlocks($field['customBlocks']);
+        }
+
+        return $component;
+    }
+
+    private static function configureSlugGeneration(TextInput $component, string $slugTarget, string $locale): TextInput
+    {
+        $slugPath = "{$slugTarget}.{$locale}";
+
+        return $component
+            ->live(onBlur: true)
+            ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) use ($locale, $slugPath): void {
+                $currentSlug = (string) ($get($slugPath) ?? '');
+                $oldSlug = Str::slug((string) $old, '-', $locale);
+
+                if ($currentSlug !== '' && $currentSlug !== $oldSlug) {
+                    return;
+                }
+
+                $set($slugPath, Str::slug((string) $state, '-', $locale));
+            });
     }
 
     private static function linesToText(mixed $state): ?string

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\BlogPosts;
 
+use App\Filament\Forms\Components\RichEditor\RichContentCustomBlocks\YouTubeVideoBlock;
 use App\Filament\Resources\BlogPosts\Pages\CreateBlogPost;
 use App\Filament\Resources\BlogPosts\Pages\EditBlogPost;
 use App\Filament\Resources\BlogPosts\Pages\ListBlogPosts;
@@ -51,15 +52,16 @@ class BlogPostResource extends Resource
                 Toggle::make('is_published')
                     ->default(false)
                     ->required(),
-                Fields::imageUpload('image', 'img/uploads/blog'),
+                Fields::imageUpload('image', 'img/uploads/blog')
+                    ->columnSpan(1),
                 Fields::translations([
+                    ['name' => 'title', 'label' => 'Title', 'required' => true, 'slugTarget' => 'slug'],
                     ['name' => 'slug', 'label' => 'Slug', 'required' => true],
-                    ['name' => 'title', 'label' => 'Title', 'required' => true],
                     ['name' => 'excerpt', 'label' => 'Excerpt', 'type' => 'textarea', 'rows' => 3, 'full' => true],
-                    ['name' => 'body', 'label' => 'Body paragraphs', 'type' => 'lines', 'rows' => 10],
+                    ['name' => 'body', 'label' => 'Body paragraphs', 'type' => 'rich-editor', 'full' => true, 'fileAttachmentsDirectory' => 'img/uploads/blog/content', 'customBlocks' => [YouTubeVideoBlock::class]],
                 ]),
             ])
-            ->columns(3);
+            ->columns(4);
     }
 
     public static function table(Table $table): Table
