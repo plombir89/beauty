@@ -54,14 +54,13 @@ class CertificateResource extends Resource
                     ->visibility('public')
                     ->imageEditor()
                     ->maxSize(4096)
-                    ->columnSpanFull()
                     ->required(),
                 Fields::translations([
                     ['name' => 'title', 'label' => 'Title', 'required' => true],
                     ['name' => 'alt', 'label' => 'Alt text', 'required' => true],
                 ]),
             ])
-            ->columns(2);
+            ->columns(3);
     }
 
     public static function table(Table $table): Table
