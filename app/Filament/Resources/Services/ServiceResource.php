@@ -18,6 +18,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -46,33 +47,36 @@ class ServiceResource extends Resource
             ->components([
                 Section::make('Service')
                     ->schema([
-                        Fields::relationshipSelect('service_category_id', 'category', 'title', 'Category')
-                            ->required(),
-                        TextInput::make('key')
-                            ->required()
-                            ->maxLength(255),
-                        TextInput::make('price_from')
-                            ->numeric()
-                            ->prefix('$'),
-                        TextInput::make('sort_order')
-                            ->required()
-                            ->numeric()
-                            ->default(0),
-                        Toggle::make('is_featured')
-                            ->label('Top service')
-                            ->default(false),
-                        TextInput::make('featured_sort_order')
-                            ->numeric(),
-                        Toggle::make('is_active')
-                            ->default(true)
-                            ->required(),
-                        Select::make('specialists')
-                            ->multiple()
-                            ->relationship(titleAttribute: 'name')
-                            ->getOptionLabelFromRecordUsing(fn ($record): string => (string) $record->name)
-                            ->searchable()
-                            ->preload()
-                            ->columnSpanFull(),
+                        Grid::make(2)
+                            ->schema([
+                                Fields::relationshipSelect('service_category_id', 'category', 'title', 'Category')
+                                    ->required(),
+                                TextInput::make('key')
+                                    ->required()
+                                    ->maxLength(255),
+                                TextInput::make('price_from')
+                                    ->numeric()
+                                    ->prefix('$'),
+                                TextInput::make('sort_order')
+                                    ->required()
+                                    ->numeric()
+                                    ->default(0),
+                                Toggle::make('is_featured')
+                                    ->label('Top service')
+                                    ->default(false),
+                                TextInput::make('featured_sort_order')
+                                    ->numeric(),
+                                Toggle::make('is_active')
+                                    ->default(true)
+                                    ->required(),
+                                Select::make('specialists')
+                                    ->multiple()
+                                    ->relationship(titleAttribute: 'name')
+                                    ->getOptionLabelFromRecordUsing(fn ($record): string => (string) $record->name)
+                                    ->searchable()
+                                    ->preload()
+                                    ->columnSpanFull(),
+                            ]),
                         FileUpload::make('image')
                             ->image()
                             ->disk('public')
@@ -80,9 +84,10 @@ class ServiceResource extends Resource
                             ->visibility('public')
                             ->imageEditor()
                             ->maxSize(4096)
-                            ->columnSpanFull(),
+                            ->columnSpan(1),
                     ])
-                    ->columns(3),
+                    ->columns(2)
+                    ->columnSpanFull(),
                 Fields::translations([
                     ['name' => 'title', 'label' => 'Title', 'required' => true, 'slugTarget' => 'slug'],
                     ['name' => 'slug', 'label' => 'Slug', 'required' => true],
