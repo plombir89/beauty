@@ -4,6 +4,7 @@ Before planning or editing, find the row whose globs match the file's path and r
 
 | Applies to | Rule file |
 | --- | --- |
+| app/Filament/Resources/AboutPageContents/** | .ai/rules/about-page-contents.md |
 | app/Filament/Resources/CtaBlocks/** | .ai/rules/cta-blocks.md |
 | app/Filament/Resources/ExpertisePillars/** | .ai/rules/expertise-pillars.md |
 | app/Filament/Resources/HomeHeroBlocks/** | .ai/rules/home-hero-blocks.md |

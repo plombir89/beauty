@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\AboutPageContent;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use App\Models\Certificate;
@@ -120,6 +121,19 @@ test('why choose images render from public storage', function (): void {
     $this->get(route('en.why.show', ['itemSlug' => $item->getTranslation('slug', 'en')]))
         ->assertOk()
         ->assertSee('storage/'.ltrim((string) $item->image, '/'), false);
+});
+
+test('about page content image renders from public storage', function (): void {
+    $content = AboutPageContent::query()
+        ->active()
+        ->where('key', 'main')
+        ->firstOrFail();
+
+    expect($content->image)->toStartWith('about/');
+
+    $this->get('/en/about')
+        ->assertOk()
+        ->assertSee('storage/'.ltrim((string) $content->image, '/'), false);
 });
 
 test('about page renders active team specialists with storage images', function (): void {

@@ -7,3 +7,6 @@ paths:
 
 ## About page includes active team
 The About page should render the Team section from active specialists ordered by `sort_order`, eager-loading active ordered services for the service chips. Specialist images on this page should be rendered from `asset('storage/'.ltrim($specialist->image, '/'))`.
+
+## About page content image uses storage URL
+The About Page Content hero image should be rendered from public storage with `asset('storage/'.ltrim($content->image, '/'))`; DB values should be relative public disk paths such as `about/9.jpg`.

@@ -8,11 +8,13 @@ use App\Filament\Support\Fields;
 use App\Models\AboutPageContent;
 use BackedEnum;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\TernaryFilter;
@@ -61,7 +63,14 @@ class AboutPageContentResource extends Resource
                 Toggle::make('is_active')
                     ->default(true)
                     ->required(),
-                Fields::imageUpload('image', 'img/uploads/about'),
+                FileUpload::make('image')
+                    ->image()
+                    ->disk('public')
+                    ->directory('about')
+                    ->visibility('public')
+                    ->imageEditor()
+                    ->maxSize(4096)
+                    ->columnSpanFull(),
                 Fields::translations([
                     ['name' => 'eyebrow', 'label' => 'Eyebrow'],
                     ['name' => 'title', 'label' => 'Title', 'required' => true],
@@ -77,7 +86,11 @@ class AboutPageContentResource extends Resource
     {
         return $table
             ->columns([
-                Fields::imageColumn(),
+                ImageColumn::make('image')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->imageHeight(56)
+                    ->square(),
                 TextColumn::make('title')
                     ->searchable()
                     ->sortable(),

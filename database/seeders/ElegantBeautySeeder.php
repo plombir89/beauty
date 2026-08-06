@@ -471,7 +471,7 @@ class ElegantBeautySeeder extends Seeder
                     'en' => 'I opened my studio after facing the problem of acne with my daughter. That experience was very difficult for us, and I realised how important it is to have access to quality support. Completing the New York Pro Acne qualification with specialists from Russia, Belarus and America gave me the ability to approach this issue professionally. Now my goal is to help other people going through similar difficulties.',
                     'ru' => 'Я открыла свою студию после того, как столкнулась с проблемой акне у дочери. Этот опыт был очень трудным для нас, и я поняла, как важно иметь доступ к качественной поддержке. Пройдя квалификацию по программе New York Pro Acne у специалистов из России, Белоруссии и Америки, я получила возможность профессионально подходить к этой проблеме. Теперь моя цель - помогать другим людям, проходящим через похожие трудности.',
                 ],
-                'image' => '/img/9.jpg',
+                'image' => 'about/9.jpg',
                 'is_active' => true,
             ],
         );
