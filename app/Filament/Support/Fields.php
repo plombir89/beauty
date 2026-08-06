@@ -41,11 +41,11 @@ class Fields
             ->columnSpanFull();
     }
 
-    public static function imageUpload(string $name = 'image', string $directory = 'img/uploads'): FileUpload
+    public static function imageUpload(string $name = 'image', string $directory = 'uploads'): FileUpload
     {
         return FileUpload::make($name)
             ->image()
-            ->disk('public_uploads')
+            ->disk('public')
             ->directory($directory)
             ->visibility('public')
             ->imageEditor()
@@ -56,22 +56,10 @@ class Fields
     public static function imageColumn(string $name = 'image'): ImageColumn
     {
         return ImageColumn::make($name)
-            ->getStateUsing(fn (Model $record): ?string => self::publicAsset($record->getAttribute($name)))
+            ->disk('public')
+            ->visibility('public')
             ->imageHeight(56)
             ->square();
-    }
-
-    public static function publicAsset(mixed $path): ?string
-    {
-        if (! is_string($path) || blank($path)) {
-            return null;
-        }
-
-        if (filter_var($path, FILTER_VALIDATE_URL) !== false) {
-            return $path;
-        }
-
-        return asset(ltrim($path, '/'));
     }
 
     public static function linesTextarea(string $name, string $label, int $rows = 6): Textarea
@@ -173,8 +161,8 @@ class Fields
     {
         $component = RichEditor::make($name)
             ->label($label)
-            ->fileAttachmentsDisk('public_uploads')
-            ->fileAttachmentsDirectory((string) ($field['fileAttachmentsDirectory'] ?? 'img/uploads/rich-content'))
+            ->fileAttachmentsDisk((string) ($field['fileAttachmentsDisk'] ?? 'public'))
+            ->fileAttachmentsDirectory((string) ($field['fileAttachmentsDirectory'] ?? 'rich-content'))
             ->fileAttachmentsVisibility('public');
 
         if (isset($field['customBlocks']) && is_array($field['customBlocks'])) {

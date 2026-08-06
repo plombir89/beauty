@@ -1,12 +1,14 @@
 <?php
 
 use App\Models\AboutPageContent;
+use App\Models\AboutTeaser;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use App\Models\Certificate;
 use App\Models\CtaBlock;
 use App\Models\ExpertisePillar;
 use App\Models\HomeHeroBlock;
+use App\Models\Page;
 use App\Models\Service;
 use App\Models\Specialist;
 use App\Models\StudioProfile;
@@ -134,6 +136,70 @@ test('about page content image renders from public storage', function (): void {
     $this->get('/en/about')
         ->assertOk()
         ->assertSee('storage/'.ltrim((string) $content->image, '/'), false);
+});
+
+test('about page content rich text renders as html', function (): void {
+    $content = AboutPageContent::query()
+        ->active()
+        ->where('key', 'main')
+        ->firstOrFail();
+
+    $content->setTranslations('text', [
+        'en' => '<p><strong>Rich care copy</strong></p>',
+        'ru' => '<p><strong>Расширенный текст</strong></p>',
+    ]);
+    $content->save();
+
+    $this->get('/en/about')
+        ->assertOk()
+        ->assertSee('about-rich-content', false)
+        ->assertSee('<strong>Rich care copy</strong>', false)
+        ->assertDontSee(e('<strong>Rich care copy</strong>'), false);
+});
+
+test('home about teaser image renders from public storage', function (): void {
+    $teaser = AboutTeaser::query()
+        ->active()
+        ->where('key', 'home')
+        ->firstOrFail();
+
+    expect($teaser->image)->toStartWith('about/');
+
+    $this->get('/en')
+        ->assertOk()
+        ->assertSee('storage/'.ltrim((string) $teaser->image, '/'), false);
+});
+
+test('blog images render from public storage', function (): void {
+    $post = BlogPost::query()
+        ->published()
+        ->whereNotNull('image')
+        ->firstOrFail();
+
+    expect($post->image)->toStartWith('blog/');
+
+    $this->get('/en/blog')
+        ->assertOk()
+        ->assertSee('storage/'.ltrim((string) $post->image, '/'), false);
+
+    $this->get(route('en.blog.show', ['postSlug' => $post->getTranslation('slug', 'en')]))
+        ->assertOk()
+        ->assertSee('storage/'.ltrim((string) $post->image, '/'), false);
+});
+
+test('seo and site logo images render from public storage', function (): void {
+    $page = Page::query()
+        ->published()
+        ->where('key', 'home')
+        ->firstOrFail();
+
+    expect($page->og_image)->toStartWith('seo/');
+
+    $this->get('/en')
+        ->assertOk()
+        ->assertSee('storage/'.ltrim((string) $page->og_image, '/'), false)
+        ->assertSee('storage/site/logo.png', false)
+        ->assertSee('storage/site/logo-white.png', false);
 });
 
 test('about page renders active team specialists with storage images', function (): void {

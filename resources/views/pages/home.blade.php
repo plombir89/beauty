@@ -170,7 +170,7 @@
         <section class="bg-sand-50 py-20 sm:py-28">
             <div class="mx-auto grid w-full max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
                 @if ($aboutTeaser->image)
-                    <img src="{{ asset($aboutTeaser->image) }}" alt="" class="aspect-[4/3] w-full rounded-[2.5rem] object-cover shadow-lift">
+                    <img src="{{ asset('storage/'.ltrim($aboutTeaser->image, '/')) }}" alt="" class="aspect-[4/3] w-full rounded-[2.5rem] object-cover shadow-lift">
                 @endif
                 <div>
                     <span class="eyebrow inline-flex items-center gap-3"><span aria-hidden="true" class="h-px w-8 bg-gold-400"></span>{{ $aboutTeaser->eyebrow }}</span>

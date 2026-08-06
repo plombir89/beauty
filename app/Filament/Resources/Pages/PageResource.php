@@ -48,7 +48,7 @@ class PageResource extends Resource
                 Toggle::make('is_published')
                     ->default(true)
                     ->required(),
-                Fields::imageUpload('og_image', 'img/uploads/seo')
+                Fields::imageUpload('og_image', 'seo')
                     ->label('Open Graph image'),
                 Fields::translations([
                     ['name' => 'title', 'label' => 'Title', 'required' => true],

@@ -21,7 +21,7 @@
     @if ($post->image)
         <div class="bg-cream">
             <div class="mx-auto w-full max-w-5xl px-5 sm:px-8">
-                <img src="{{ asset($post->image) }}" alt="" class="aspect-[16/9] w-full rounded-[2.5rem] object-cover shadow-lift">
+                <img src="{{ asset('storage/'.ltrim($post->image, '/')) }}" alt="" class="aspect-[16/9] w-full rounded-[2.5rem] object-cover shadow-lift">
             </div>
         </div>
     @endif

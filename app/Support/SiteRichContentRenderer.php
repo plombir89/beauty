@@ -14,7 +14,7 @@ class SiteRichContentRenderer
     {
         $html = RichContentRenderer::make(self::normalizeContent($content))
             ->customBlocks([YouTubeVideoBlock::class])
-            ->fileAttachmentsDisk('public_uploads')
+            ->fileAttachmentsDisk('public')
             ->fileAttachmentsVisibility('public')
             ->toHtml();
 

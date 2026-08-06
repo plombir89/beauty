@@ -17,7 +17,7 @@
     <div class="relative mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 sm:py-20">
         <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.1fr_1fr]">
             <div>
-                <img src="{{ asset('img/logoWhite.png') }}" alt="Elegant Beauty Studio" class="h-24 w-auto" loading="lazy">
+                <img src="{{ asset('storage/site/logo-white.png') }}" alt="Elegant Beauty Studio" class="h-24 w-auto" loading="lazy">
                 <p class="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
                     {{ __('site.footer.tagline') }}
                 </p>

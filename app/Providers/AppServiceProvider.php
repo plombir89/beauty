@@ -55,8 +55,8 @@ class AppServiceProvider extends ServiceProvider
             ->canonical(forceHttps: false)
             ->og(siteName: 'Elegant Beauty Studio', type: OgType::Website)
             ->twitter(card: TwitterCard::SummaryWithLargeImage)
-            ->favicon('/img/logo.png', type: 'image/png')
-            ->appleTouchIcon('/img/logo.png')
+            ->favicon('/storage/site/logo.png', type: 'image/png')
+            ->appleTouchIcon('/storage/site/logo.png')
             ->searchableByRobots());
 
         DB::prohibitDestructiveCommands(

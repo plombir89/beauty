@@ -96,7 +96,7 @@ class ServiceResource extends Resource
                     ['name' => 'skin_type', 'label' => 'Skin type'],
                     ['name' => 'summary', 'label' => 'Summary', 'type' => 'textarea', 'rows' => 3, 'required' => true, 'full' => true],
                     ['name' => 'benefits', 'label' => 'Benefits', 'type' => 'lines', 'rows' => 6],
-                    ['name' => 'details', 'label' => 'Details', 'type' => 'rich-editor', 'full' => true, 'fileAttachmentsDirectory' => 'img/uploads/services/content', 'customBlocks' => [YouTubeVideoBlock::class]],
+                    ['name' => 'details', 'label' => 'Details', 'type' => 'rich-editor', 'full' => true, 'fileAttachmentsDirectory' => 'services/content', 'customBlocks' => [YouTubeVideoBlock::class]],
                     ['name' => 'note', 'label' => 'Note', 'type' => 'textarea', 'rows' => 3, 'full' => true],
                 ]),
                 Repeater::make('prices')

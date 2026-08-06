@@ -30,7 +30,7 @@
         <div class="mx-auto w-full max-w-7xl px-5 sm:px-8">
             <div class="flex items-center justify-between gap-4">
                 <a href="{{ route($locale.'.home') }}" class="group flex items-center gap-3" aria-label="Elegant Beauty Studio">
-                    <img src="{{ asset('img/logo.png') }}" alt="" width="48" height="48" class="h-12 w-auto mix-blend-multiply transition-all duration-500" :style="scrolled ? 'height: 2.5rem;' : 'height: 3rem;'">
+                    <img src="{{ asset('storage/site/logo.png') }}" alt="" width="48" height="48" class="h-12 w-auto mix-blend-multiply transition-all duration-500" :style="scrolled ? 'height: 2.5rem;' : 'height: 3rem;'">
                     <span class="hidden sm:block">
                         <span class="font-display text-plum-900 block text-lg leading-none font-medium tracking-wide">Elegant Beauty</span>
                         <span class="text-gold-600 text-[0.62rem] tracking-[0.32em] uppercase">Studio</span>
@@ -97,7 +97,7 @@
         class="fixed inset-y-0 right-0 z-[70] flex w-[min(22rem,90vw)] flex-col overflow-y-auto bg-cream p-6 shadow-2xl lg:hidden"
     >
         <div class="flex items-center justify-between">
-            <img src="{{ asset('img/logo.png') }}" alt="" class="h-10 w-auto mix-blend-multiply">
+            <img src="{{ asset('storage/site/logo.png') }}" alt="" class="h-10 w-auto mix-blend-multiply">
             <button x-ref="mobileMenuClose" type="button" x-on:click="open = false" aria-label="{{ __('site.nav.close_menu') }}" class="border-sand-200 text-plum-700 hover:border-plum-400 grid size-11 place-items-center rounded-full border bg-white transition-colors">
                 <span class="text-xl leading-none" aria-hidden="true">&times;</span>
             </button>

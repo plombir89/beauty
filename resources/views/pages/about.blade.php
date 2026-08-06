@@ -30,8 +30,13 @@
     @if ($content)
         <section class="py-16 sm:py-20">
             <div class="mx-auto w-full max-w-3xl px-5 sm:px-8">
-                <div class="prose-lg flex flex-col gap-6">
-                    <p class="text-ink-soft text-lg leading-relaxed">{{ $content->text }}</p>
+                <div class="flex flex-col gap-6">
+                    @if ($content->text)
+                        <div class="about-rich-content">
+                            {{ \App\Support\SiteRichContentRenderer::render($content->text) }}
+                        </div>
+                    @endif
+
                     <p class="text-ink-soft text-lg leading-relaxed">{{ $content->text2 }}</p>
                 </div>
             </div>

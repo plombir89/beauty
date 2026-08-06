@@ -61,7 +61,7 @@ class AboutTeaserResource extends Resource
                 Toggle::make('is_active')
                     ->default(true)
                     ->required(),
-                Fields::imageUpload('image', 'img/uploads/about')
+                Fields::imageUpload('image', 'about')
                     ->columnSpan(1),
                 Fields::translations([
                     ['name' => 'eyebrow', 'label' => 'Eyebrow'],

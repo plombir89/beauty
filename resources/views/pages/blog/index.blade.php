@@ -43,7 +43,7 @@
                         <article class="border-sand-100 shadow-soft hover:shadow-lift group relative flex h-full flex-col overflow-hidden rounded-4xl border bg-white transition-all duration-500 hover:-translate-y-1">
                             <a href="{{ route($locale.'.blog.show', ['postSlug' => $post->slug]) }}" class="block">
                                 @if ($post->image)
-                                    <img src="{{ asset($post->image) }}" alt="" class="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]">
+                                    <img src="{{ asset('storage/'.ltrim($post->image, '/')) }}" alt="" class="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]">
                                 @endif
                                 <div class="flex flex-1 flex-col p-6">
                                     <p class="text-gold-600 text-xs font-semibold uppercase tracking-[0.16em]">{{ $post->category?->title }}</p>
