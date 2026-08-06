@@ -414,21 +414,21 @@ class ElegantBeautySeeder extends Seeder
         );
 
         $certificates = [
-            '/img/sertificate.jpg',
-            '/img/sertificate1.jpg',
-            '/img/sertificate2.jpg',
-            '/img/sertificate3.jpg',
-            '/img/sertificate4.jpg',
-            '/img/sertificate5.jpg',
+            'certificates/sertificate.jpg',
+            'certificates/sertificate1.jpg',
+            'certificates/sertificate2.jpg',
+            'certificates/sertificate3.jpg',
+            'certificates/sertificate4.jpg',
+            'certificates/sertificate5.jpg',
         ];
 
         foreach ($certificates as $index => $image) {
             Certificate::query()->updateOrCreate(
-                ['image' => $image],
+                ['sort_order' => $index + 1],
                 [
+                    'image' => $image,
                     'title' => ['en' => 'Certificate '.($index + 1), 'ru' => 'Сертификат '.($index + 1)],
                     'alt' => ['en' => 'Elegant Beauty Studio certificate', 'ru' => 'Сертификат Elegant Beauty Studio'],
-                    'sort_order' => $index + 1,
                     'is_active' => true,
                 ],
             );
@@ -582,7 +582,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'deep-pore-cleaning',
                 'category' => 'facial',
-                'image' => '/img/services/europeanDeepPoreCleansing.jpg',
+                'image' => 'services/europeanDeepPoreCleansing.jpg',
                 'featured' => 1,
                 'title' => ['en' => 'Deep pore cleaning', 'ru' => 'Глубокая очистка пор'],
                 'display_price' => ['en' => '$60.99', 'ru' => '$60.99'],
@@ -598,7 +598,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'facial-chemical-peels',
                 'category' => 'facial',
-                'image' => '/img/services/facialPillungs.jpg',
+                'image' => 'services/facialPillungs.jpg',
                 'title' => ['en' => 'Facial chemical peels', 'ru' => 'Химические пилинги для лица'],
                 'display_price' => ['en' => '$139.99 - $269.99', 'ru' => '$139.99 - $269.99'],
                 'price_from' => 139.99,
@@ -613,7 +613,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'hydrodermabrasion',
                 'category' => 'facial',
-                'image' => '/img/services/hydraFacial.jpg',
+                'image' => 'services/hydraFacial.jpg',
                 'featured' => 4,
                 'title' => ['en' => 'Hydrodermabrasion', 'ru' => 'Гидродермабразия'],
                 'display_price' => ['en' => '$109.00', 'ru' => '$109.00'],
@@ -629,7 +629,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'dermaplaning-facial',
                 'category' => 'facial',
-                'image' => '/img/services/dermaplaningFacial.jpg',
+                'image' => 'services/dermaplaningFacial.jpg',
                 'title' => ['en' => 'Dermaplaning facial', 'ru' => 'Дермапланинг лица'],
                 'display_price' => ['en' => '$119.99', 'ru' => '$119.99'],
                 'price_from' => 119.99,
@@ -644,7 +644,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'ultrasonic-facial',
                 'category' => 'facial',
-                'image' => '/img/services/ultrasonicFacial.jpg',
+                'image' => 'services/ultrasonicFacial.jpg',
                 'title' => ['en' => 'Ultrasonic facial', 'ru' => 'Ультразвуковой уход за лицом'],
                 'display_price' => ['en' => '$119.99', 'ru' => '$119.99'],
                 'price_from' => 119.99,
@@ -659,7 +659,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'microneedling',
                 'category' => 'facial',
-                'image' => '/img/services/microneedling.jpg',
+                'image' => 'services/microneedling.jpg',
                 'featured' => 5,
                 'title' => ['en' => 'Microneedling', 'ru' => 'Микронидлинг'],
                 'display_price' => ['en' => '$174.99', 'ru' => '$174.99'],
@@ -675,7 +675,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'face-and-decollete-massage',
                 'category' => 'facial',
-                'image' => '/img/services/faceDecolleteMassage.jpg',
+                'image' => 'services/faceDecolleteMassage.jpg',
                 'title' => ['en' => 'Face, neck and décolleté massage', 'ru' => 'Массаж лица, шеи и зоны декольте'],
                 'display_price' => ['en' => '$99.99', 'ru' => '$99.99'],
                 'price_from' => 99.99,
@@ -690,7 +690,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'pro-acne',
                 'category' => 'programs',
-                'image' => '/img/services/pro-acneProgram.jpg',
+                'image' => 'services/pro-acneProgram.jpg',
                 'title' => ['en' => 'Pro-Acne consultation', 'ru' => 'Консультация Pro-Acne'],
                 'display_price' => ['en' => "In-clinic consultation - $79.99\nOnline consultation - $79.99", 'ru' => "Консультация в клинике - $79.99\nОнлайн-консультация - $79.99"],
                 'price_from' => 79.99,
@@ -709,7 +709,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'mild-acne-program',
                 'category' => 'programs',
-                'image' => '/img/services/mild-acne.jpg',
+                'image' => 'services/mild-acne.jpg',
                 'title' => ['en' => 'Mild acne program', 'ru' => 'Программа лёгкой степени акне'],
                 'display_price' => ['en' => '$700', 'ru' => '$700'],
                 'price_from' => 700,
@@ -725,7 +725,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'standard-acne-program',
                 'category' => 'programs',
-                'image' => '/img/services/standart-acne.jpg',
+                'image' => 'services/standart-acne.jpg',
                 'title' => ['en' => 'Standard acne program', 'ru' => 'Стандартная программа акне'],
                 'display_price' => ['en' => '$1,300', 'ru' => '$1,300'],
                 'price_from' => 1300,
@@ -741,7 +741,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'virtual-acne-program',
                 'category' => 'programs',
-                'image' => '/img/services/acne-program.jpg',
+                'image' => 'services/acne-program.jpg',
                 'title' => ['en' => 'Virtual acne program', 'ru' => 'Онлайн-программа лечения акне'],
                 'display_price' => ['en' => '$500', 'ru' => '$500'],
                 'price_from' => 500,
@@ -761,7 +761,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'pigmentation-program',
                 'category' => 'programs',
-                'image' => '/img/services/pigmentation.jpg',
+                'image' => 'services/pigmentation.jpg',
                 'title' => ['en' => 'Pigmentation program', 'ru' => 'Программа против пигментации'],
                 'display_price' => ['en' => '$1,050 - $1,400', 'ru' => '$1,050 - $1,400'],
                 'price_from' => 1050,
@@ -780,7 +780,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'lamination',
                 'category' => 'brows',
-                'image' => '/img/services/lamination.jpg',
+                'image' => 'services/lamination.jpg',
                 'featured' => 2,
                 'title' => ['en' => 'Lamination (brows & lashes)', 'ru' => 'Ламинирование (брови и ресницы)'],
                 'display_price' => ['en' => '$59.99', 'ru' => '$59.99'],
@@ -796,7 +796,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'tinting',
                 'category' => 'brows',
-                'image' => '/img/services/tining.jpg',
+                'image' => 'services/tining.jpg',
                 'featured' => 3,
                 'title' => ['en' => 'Tinting (brows & lashes)', 'ru' => 'Тинтинг (брови и ресницы)'],
                 'display_price' => ['en' => '$59.99', 'ru' => '$59.99'],
@@ -812,7 +812,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'full-body-massage',
                 'category' => 'body',
-                'image' => '/img/services/full-body-massage.jpg',
+                'image' => 'services/full-body-massage.jpg',
                 'featured' => 6,
                 'title' => ['en' => 'Full body massage', 'ru' => 'Комплексный массаж тела'],
                 'display_price' => ['en' => '$110 - 1 hour', 'ru' => '$110 - 1 час'],
@@ -829,7 +829,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'bandage-body-wrap',
                 'category' => 'body',
-                'image' => '/img/services/banageBodyWrap.jpg',
+                'image' => 'services/banageBodyWrap.jpg',
                 'title' => ['en' => 'Bandage body wrap', 'ru' => 'Бандажное обёртывание тела'],
                 'display_price' => ['en' => "Full body wrap - $149.99\nHerbal wrap - $139.99\nSeaweed body wrap - $139.99", 'ru' => "Полное обёртывание тела - $149.99\nТравяное обёртывание - $139.99\nОбёртывание из водорослей - $139.99"],
                 'price_from' => 139.99,
@@ -847,7 +847,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'scalp-needling',
                 'category' => 'hair',
-                'image' => '/img/services/scalpNeedling.jpg',
+                'image' => 'services/scalpNeedling.jpg',
                 'title' => ['en' => 'Scalp needling / trich needling', 'ru' => 'Микронидлинг кожи головы / трихонидлинг'],
                 'display_price' => ['en' => '$174.99', 'ru' => '$174.99'],
                 'price_from' => 174.99,
@@ -862,7 +862,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'teeth-whitening',
                 'category' => 'smile',
-                'image' => '/img/services/philipsZoomTeethWhitening.jpg',
+                'image' => 'services/philipsZoomTeethWhitening.jpg',
                 'title' => ['en' => 'Philips Zoom teeth whitening', 'ru' => 'Отбеливание зубов Philips Zoom'],
                 'display_price' => ['en' => '$249.99 + $49.99', 'ru' => '$249.99 + $49.99'],
                 'price_from' => 249.99,

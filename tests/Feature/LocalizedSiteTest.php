@@ -2,6 +2,7 @@
 
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
+use App\Models\Certificate;
 use App\Models\CtaBlock;
 use App\Models\ExpertisePillar;
 use App\Models\Service;
@@ -53,6 +54,27 @@ test('home page shows six top services', function (): void {
     foreach ($topServices as $service) {
         $response->assertSee($service->getTranslation('title', 'en'));
     }
+});
+
+test('service and certificate images render from public storage', function (): void {
+    $service = Service::query()
+        ->active()
+        ->whereNotNull('image')
+        ->firstOrFail();
+    $certificate = Certificate::query()
+        ->active()
+        ->firstOrFail();
+
+    expect($service->image)->toStartWith('services/');
+    expect($certificate->image)->toStartWith('certificates/');
+
+    $this->get(route('en.services.show', ['serviceSlug' => $service->getTranslation('slug', 'en')]))
+        ->assertOk()
+        ->assertSee('storage/'.ltrim((string) $service->image, '/'), false);
+
+    $this->get('/en')
+        ->assertOk()
+        ->assertSee('storage/'.ltrim((string) $certificate->image, '/'), false);
 });
 
 test('home page shows the main CTA block', function (): void {

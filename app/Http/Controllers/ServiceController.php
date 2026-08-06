@@ -81,7 +81,7 @@ class ServiceController extends Controller
             title: $service->title,
             description: $service->summary,
             alternates: LocalizedRoutes::serviceAlternates($service),
-            image: $service->image,
+            image: $service->image ? asset('storage/'.ltrim($service->image, '/')) : null,
         );
 
         return view('pages.services.show', [

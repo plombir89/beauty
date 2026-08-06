@@ -9,7 +9,7 @@
     <div class="border-sand-100 shadow-soft hover:shadow-lift group relative flex h-full flex-col overflow-hidden rounded-4xl border bg-white transition-all duration-500 hover:-translate-y-1">
         <div class="relative overflow-hidden">
             @if ($service->image)
-                <img src="{{ asset($service->image) }}" alt="" class="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]">
+                <img src="{{ asset('storage/'.ltrim($service->image, '/')) }}" alt="" class="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.06]">
             @endif
             <span class="text-plum-700 absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] backdrop-blur">
                 {{ $service->category?->title }}

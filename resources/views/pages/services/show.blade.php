@@ -12,7 +12,7 @@
             <div class="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16">
                 <div>
                     @if ($service->image)
-                        <img src="{{ asset($service->image) }}" alt="{{ $service->title }}" class="aspect-[4/5] w-full rounded-[2.5rem] object-cover shadow-lift lg:sticky lg:top-28">
+                        <img src="{{ asset('storage/'.ltrim($service->image, '/')) }}" alt="{{ $service->title }}" class="aspect-[4/5] w-full rounded-[2.5rem] object-cover shadow-lift lg:sticky lg:top-28">
                     @endif
                 </div>
 
