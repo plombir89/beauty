@@ -133,3 +133,131 @@ document.addEventListener('keydown', (event) => {
         moveLightbox(1);
     }
 });
+
+const paypalFeedbackClasses = {
+    success: ['border-emerald-200', 'bg-emerald-50', 'text-emerald-800'],
+    error: ['border-blush-200', 'bg-blush-50', 'text-blush-500'],
+    cancelled: ['border-sand-200', 'bg-sand-50', 'text-ink-soft'],
+};
+
+const buildPayPalScriptUrl = (root) => {
+    const params = new URLSearchParams({
+        'client-id': root.dataset.clientId,
+        components: 'buttons',
+        currency: root.dataset.currency || 'USD',
+        intent: 'capture',
+    });
+
+    if (root.dataset.locale) {
+        params.set('locale', root.dataset.locale);
+    }
+
+    return `https://www.paypal.com/sdk/js?${params.toString()}`;
+};
+
+const loadPayPalScript = (root) => {
+    if (window.paypal?.Buttons) {
+        return Promise.resolve();
+    }
+
+    if (window.paypalDepositScript) {
+        return window.paypalDepositScript;
+    }
+
+    window.paypalDepositScript = new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = buildPayPalScriptUrl(root);
+        script.async = true;
+        script.addEventListener('load', resolve);
+        script.addEventListener('error', reject);
+        document.head.append(script);
+    });
+
+    return window.paypalDepositScript;
+};
+
+const hidePayPalLoading = (root) => {
+    root.querySelector('[data-paypal-loading]')?.classList.add('hidden');
+};
+
+const showPayPalUnavailable = (root) => {
+    hidePayPalLoading(root);
+    root.querySelector('[data-paypal-buttons]')?.classList.add('hidden');
+    root.querySelector('[data-paypal-unavailable]')?.classList.remove('hidden');
+};
+
+const showPayPalFeedback = (root, status, payerName = '') => {
+    const feedback = root.parentElement?.querySelector('[data-paypal-feedback]');
+
+    if (!feedback) {
+        return;
+    }
+
+    Object.values(paypalFeedbackClasses).flat().forEach((className) => feedback.classList.remove(className));
+    feedback.classList.remove('hidden');
+    feedback.classList.add('flex', ...paypalFeedbackClasses[status]);
+
+    const template = root.dataset[`${status}Template`] || '';
+    const name = payerName ? `, ${payerName}` : '';
+    feedback.textContent = template.replace(':name', name);
+};
+
+const initializePayPalDeposit = (root) => {
+    if (root.dataset.paypalInitialized === 'true') {
+        return;
+    }
+
+    root.dataset.paypalInitialized = 'true';
+
+    if (!root.dataset.clientId || Number(root.dataset.amount) <= 0) {
+        showPayPalUnavailable(root);
+
+        return;
+    }
+
+    loadPayPalScript(root)
+        .then(() => {
+            const buttonsContainer = root.querySelector('[data-paypal-buttons]');
+
+            if (!window.paypal?.Buttons || !buttonsContainer) {
+                showPayPalUnavailable(root);
+
+                return;
+            }
+
+            hidePayPalLoading(root);
+            buttonsContainer.classList.remove('hidden');
+
+            window.paypal.Buttons({
+                style: { layout: 'vertical', shape: 'pill', color: 'gold' },
+                createOrder: (_, actions) => actions.order.create({
+                    intent: 'CAPTURE',
+                    purchase_units: [
+                        {
+                            description: root.dataset.description,
+                            amount: {
+                                value: root.dataset.amount,
+                                currency_code: root.dataset.currency || 'USD',
+                            },
+                        },
+                    ],
+                }),
+                onApprove: async (_, actions) => {
+                    const details = await actions.order?.capture();
+                    const payerName = details?.payment_source?.paypal?.name?.given_name
+                        || details?.payer?.name?.given_name
+                        || '';
+
+                    showPayPalFeedback(root, 'success', payerName);
+                },
+                onCancel: () => showPayPalFeedback(root, 'cancelled'),
+                onError: (error) => {
+                    console.error('PayPal deposit failed', error);
+                    showPayPalFeedback(root, 'error');
+                },
+            }).render(buttonsContainer);
+        })
+        .catch(() => showPayPalUnavailable(root));
+};
+
+document.querySelectorAll('[data-paypal-deposit]').forEach(initializePayPalDeposit);

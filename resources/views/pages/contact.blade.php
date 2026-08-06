@@ -22,19 +22,46 @@
 
                     @if ($depositSetting)
                         @php
-                            $amount = '$'.number_format((float) $depositSetting->amount, 0);
+                            $formattedAmount = '$'.number_format((float) $depositSetting->amount, 2);
+                            $paypalAmount = number_format((float) $depositSetting->amount, 2, '.', '');
+                            $paypalCurrency = strtoupper($depositSetting->currency);
+                            $paypalClientId = config('services.paypal.client_id');
+                            $paypalLocale = app()->getLocale() === 'ru' ? 'ru_RU' : 'en_US';
                             $methods = implode(', ', $depositSetting->offsite_payment_methods ?? []);
+                            $studioName = $studio?->name ?? config('app.name');
                         @endphp
                         <div class="border-sand-100 shadow-soft rounded-4xl border bg-white p-6 sm:p-8">
                             <span class="eyebrow inline-flex items-center gap-2">{{ $depositSetting->eyebrow }}</span>
 
-                            <h2 class="mt-4 text-2xl font-medium">{{ str_replace(':amount', $amount, $depositSetting->title) }}</h2>
+                            <h2 class="mt-4 text-2xl font-medium">{{ str_replace(':amount', $formattedAmount, $depositSetting->title) }}</h2>
 
                             <p class="text-ink-soft mt-3 text-sm leading-relaxed">{{ str_replace(':methods', $methods, $depositSetting->text) }}</p>
 
-                            <div class="border-sand-200 bg-sand-50 text-ink-soft mt-6 rounded-2xl border px-4 py-3 text-sm">
-                                {{ __('site.common.payment_methods') }}: {{ implode(', ', $depositSetting->payment_methods ?? []) }}
+                            <div
+                                class="mt-6 min-h-36"
+                                data-paypal-deposit
+                                data-client-id="{{ $paypalClientId }}"
+                                data-currency="{{ $paypalCurrency }}"
+                                data-amount="{{ $paypalAmount }}"
+                                data-locale="{{ $paypalLocale }}"
+                                data-description="{{ $studioName }} - booking deposit"
+                                data-success-template="{{ __('site.contact.deposit.success') }}"
+                                data-error-template="{{ __('site.contact.deposit.error', ['phone' => $studio?->phone ?? '']) }}"
+                                data-cancelled-template="{{ __('site.contact.deposit.cancelled') }}"
+                            >
+                                <div data-paypal-loading aria-label="{{ __('site.contact.deposit.loading') }}" role="status" class="flex flex-col gap-3">
+                                    <span class="bg-sand-100 h-11 animate-pulse rounded-full"></span>
+                                    <span class="bg-sand-100 h-11 animate-pulse rounded-full"></span>
+                                </div>
+
+                                <div data-paypal-buttons aria-label="{{ __('site.contact.deposit.buttons_label') }}" class="hidden"></div>
+
+                                <p data-paypal-unavailable role="alert" class="border-sand-200 bg-sand-50 text-ink-soft hidden rounded-2xl border px-4 py-3 text-sm">
+                                    {{ __('site.contact.deposit.unavailable', ['methods' => $methods, 'phone' => $studio?->phone ?? '']) }}
+                                </p>
                             </div>
+
+                            <p data-paypal-feedback role="status" class="mt-4 hidden items-start gap-3 rounded-2xl border px-4 py-3 text-sm"></p>
 
                             <p class="text-ink-faint mt-5 text-xs leading-relaxed">{{ $depositSetting->note }}</p>
                         </div>

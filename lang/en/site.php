@@ -120,6 +120,14 @@ return [
         'call_us' => 'Call us',
         'write_us' => 'Write us',
         'get_directions' => 'Get directions',
+        'deposit' => [
+            'success' => 'Deposit received, thank you:name! We have your slot - see you at the studio.',
+            'error' => 'The payment could not be completed. Nothing has been charged - please try again or contact us at :phone.',
+            'cancelled' => 'Payment cancelled. Your slot is not reserved yet.',
+            'unavailable' => 'Online payment is temporarily unavailable. Please send the deposit via :methods or call :phone.',
+            'loading' => 'Loading secure payment...',
+            'buttons_label' => 'Pay booking deposit with PayPal',
+        ],
     ],
     'blog' => [
         'all' => 'All posts',

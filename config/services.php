@@ -39,4 +39,8 @@ return [
         'booking_email' => env('STUDIO_BOOKING_EMAIL', 'elegantbrowsss@gmail.com'),
     ],
 
+    'paypal' => [
+        'client_id' => env('PAYPAL_CLIENT_ID', null),
+    ],
+
 ];
