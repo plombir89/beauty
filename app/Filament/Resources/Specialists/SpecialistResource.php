@@ -11,12 +11,14 @@ use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\TernaryFilter;
@@ -53,7 +55,13 @@ class SpecialistResource extends Resource
                     ->searchable()
                     ->preload()
                     ->columnSpanFull(),
-                Fields::imageUpload('image', 'img/uploads/specialists'),
+                FileUpload::make('image')
+                    ->image()
+                    ->disk('public')
+                    ->directory('specialists')
+                    ->visibility('public')
+                    ->imageEditor()
+                    ->maxSize(4096),
                 Fields::translations([
                     ['name' => 'slug', 'label' => 'Slug', 'required' => true],
                     ['name' => 'name', 'label' => 'Name', 'required' => true],
@@ -68,7 +76,11 @@ class SpecialistResource extends Resource
     {
         return $table
             ->columns([
-                Fields::imageColumn(),
+                ImageColumn::make('image')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->imageHeight(56)
+                    ->square(),
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),

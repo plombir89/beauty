@@ -7,6 +7,7 @@ use App\Models\CtaBlock;
 use App\Models\ExpertisePillar;
 use App\Models\HomeHeroBlock;
 use App\Models\Service;
+use App\Models\Specialist;
 use App\Models\StudioProfile;
 use App\Models\WhyChooseUsItem;
 use Database\Seeders\ElegantBeautySeeder;
@@ -119,6 +120,26 @@ test('why choose images render from public storage', function (): void {
     $this->get(route('en.why.show', ['itemSlug' => $item->getTranslation('slug', 'en')]))
         ->assertOk()
         ->assertSee('storage/'.ltrim((string) $item->image, '/'), false);
+});
+
+test('about page renders active team specialists with storage images', function (): void {
+    $specialist = Specialist::query()
+        ->with('services')
+        ->active()
+        ->whereHas('services')
+        ->firstOrFail();
+
+    $specialist->update(['image' => 'specialists/team-member.jpg']);
+
+    $service = $specialist->services->firstOrFail();
+
+    $this->get('/en/about')
+        ->assertOk()
+        ->assertSee(__('site.about.team_title'))
+        ->assertSee($specialist->getTranslation('name', 'en'))
+        ->assertSee($specialist->getTranslation('title', 'en'))
+        ->assertSee($service->getTranslation('title', 'en'))
+        ->assertSee('storage/specialists/team-member.jpg', false);
 });
 
 test('home page shows the main CTA block', function (): void {

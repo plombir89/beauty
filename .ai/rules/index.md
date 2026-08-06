@@ -7,5 +7,7 @@ Before planning or editing, find the row whose globs match the file's path and r
 | app/Filament/Resources/CtaBlocks/** | .ai/rules/cta-blocks.md |
 | app/Filament/Resources/ExpertisePillars/** | .ai/rules/expertise-pillars.md |
 | app/Filament/Resources/HomeHeroBlocks/** | .ai/rules/home-hero-blocks.md |
+| {app/Http/Controllers/AboutController.php,resources/views/pages/about.blade.php} | .ai/rules/pages.md |
 | app/Filament/Resources/{Services,Certificates}/** | .ai/rules/services-certificates.md |
+| app/Filament/Resources/Specialists/** | .ai/rules/specialists.md |
 | app/Filament/Resources/WhyChooseUsItems/** | .ai/rules/why-choose-us-items.md |

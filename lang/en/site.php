@@ -113,6 +113,10 @@ return [
         'related' => 'Related services',
     ],
     'about' => [
+        'team_eyebrow' => 'Team',
+        'team_title' => 'Specialists who care for every detail',
+        'team_subtitle' => 'Meet the people behind the treatments, from skin programs to massage and body care.',
+        'team_services' => 'Specialties',
         'values_title' => 'Our values',
     ],
     'contact' => [
