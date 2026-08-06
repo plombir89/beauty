@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\CtaBlocks\Pages;
 
 use App\Filament\Resources\CtaBlocks\CtaBlockResource;
-use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditCtaBlock extends EditRecord
@@ -21,8 +20,6 @@ class EditCtaBlock extends EditRecord
 
     protected function getHeaderActions(): array
     {
-        return [
-            DeleteAction::make(),
-        ];
+        return [];
     }
 }

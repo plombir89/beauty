@@ -2,14 +2,11 @@
 
 namespace App\Filament\Resources\CtaBlocks;
 
-use App\Filament\Resources\CtaBlocks\Pages\CreateCtaBlock;
 use App\Filament\Resources\CtaBlocks\Pages\EditCtaBlock;
 use App\Filament\Resources\CtaBlocks\Pages\ListCtaBlocks;
 use App\Filament\Support\Fields;
 use App\Models\CtaBlock;
 use BackedEnum;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -20,6 +17,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use UnitEnum;
 
 class CtaBlockResource extends Resource
@@ -37,6 +35,21 @@ class CtaBlockResource extends Resource
     protected static ?string $pluralModelLabel = 'CTA blocks';
 
     protected static ?string $recordTitleAttribute = 'title';
+
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return false;
+    }
 
     public static function form(Schema $schema): Schema
     {
@@ -73,11 +86,6 @@ class CtaBlockResource extends Resource
             ])
             ->recordActions([
                 EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
@@ -85,7 +93,6 @@ class CtaBlockResource extends Resource
     {
         return [
             'index' => ListCtaBlocks::route('/'),
-            'create' => CreateCtaBlock::route('/create'),
             'edit' => EditCtaBlock::route('/{record}/edit'),
         ];
     }
