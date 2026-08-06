@@ -327,7 +327,7 @@ class ElegantBeautySeeder extends Seeder
                 'key' => 'team',
                 'slug' => ['en' => 'professional-team', 'ru' => 'professionalnaya-komanda'],
                 'icon' => 'sparkles',
-                'image' => '/img/services/mensFacialWax.jpg',
+                'image' => 'choose/mensFacialWax.jpg',
                 'title' => ['en' => 'Professional team', 'ru' => 'Профессиональная команда'],
                 'summary' => [
                     'en' => 'Elegant Beauty Studio employs a team that is passionate about its work.',
@@ -348,7 +348,7 @@ class ElegantBeautySeeder extends Seeder
                 'key' => 'products',
                 'slug' => ['en' => 'premium-products', 'ru' => 'premium-produkty'],
                 'icon' => 'shield-check',
-                'image' => '/img/home/products.jpg',
+                'image' => 'choose/products.jpg',
                 'title' => ['en' => 'Premium products', 'ru' => 'Премиум-продукты'],
                 'summary' => [
                     'en' => 'We work with high-quality products that offer exceptional results and additional care.',
@@ -369,7 +369,7 @@ class ElegantBeautySeeder extends Seeder
                 'key' => 'atmosphere',
                 'slug' => ['en' => 'atmosphere', 'ru' => 'atmosfera'],
                 'icon' => 'heart-handshake',
-                'image' => '/img/home/atmosphere.jpg',
+                'image' => 'choose/atmosphere.jpg',
                 'title' => ['en' => 'Atmosphere', 'ru' => 'Атмосфера'],
                 'summary' => [
                     'en' => 'Soft colours, natural materials, warm lighting, light aromas and calm music.',

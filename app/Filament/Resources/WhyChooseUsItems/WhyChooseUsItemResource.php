@@ -11,11 +11,13 @@ use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\TernaryFilter;
@@ -54,10 +56,16 @@ class WhyChooseUsItemResource extends Resource
                 Toggle::make('is_active')
                     ->default(true)
                     ->required(),
-                Fields::imageUpload('image', 'img/uploads/why-choose-us'),
+                FileUpload::make('image')
+                    ->image()
+                    ->disk('public')
+                    ->directory('choose')
+                    ->visibility('public')
+                    ->imageEditor()
+                    ->maxSize(4096),
                 Fields::translations([
+                    ['name' => 'title', 'label' => 'Title', 'required' => true, 'slugTarget' => 'slug'],
                     ['name' => 'slug', 'label' => 'Slug', 'required' => true],
-                    ['name' => 'title', 'label' => 'Title', 'required' => true],
                     ['name' => 'summary', 'label' => 'Summary', 'type' => 'textarea', 'rows' => 3, 'full' => true],
                     ['name' => 'body', 'label' => 'Body paragraphs', 'type' => 'lines', 'rows' => 10],
                 ]),
@@ -69,7 +77,11 @@ class WhyChooseUsItemResource extends Resource
     {
         return $table
             ->columns([
-                Fields::imageColumn(),
+                ImageColumn::make('image')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->imageHeight(56)
+                    ->square(),
                 TextColumn::make('title')
                     ->searchable()
                     ->sortable(),

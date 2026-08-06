@@ -104,6 +104,23 @@ test('expertise pillar images render from public storage', function (): void {
         ->assertSee('storage/'.ltrim((string) $pillar->image, '/'), false);
 });
 
+test('why choose images render from public storage', function (): void {
+    $item = WhyChooseUsItem::query()
+        ->active()
+        ->whereNotNull('image')
+        ->firstOrFail();
+
+    expect($item->image)->toStartWith('choose/');
+
+    $this->get('/en')
+        ->assertOk()
+        ->assertSee('storage/'.ltrim((string) $item->image, '/'), false);
+
+    $this->get(route('en.why.show', ['itemSlug' => $item->getTranslation('slug', 'en')]))
+        ->assertOk()
+        ->assertSee('storage/'.ltrim((string) $item->image, '/'), false);
+});
+
 test('home page shows the main CTA block', function (): void {
     $ctaBlock = CtaBlock::query()->where('key', 'main')->firstOrFail();
     $studio = StudioProfile::query()->active()->firstOrFail();

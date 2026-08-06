@@ -16,7 +16,7 @@
             </div>
             <div class="relative">
                 @if ($item->image)
-                    <img src="{{ asset($item->image) }}" alt="" class="aspect-[4/3] w-full rounded-[2.5rem] object-cover shadow-lift">
+                    <img src="{{ asset('storage/'.ltrim($item->image, '/')) }}" alt="" class="aspect-[4/3] w-full rounded-[2.5rem] object-cover shadow-lift">
                 @endif
                 <div aria-hidden="true" class="border-gold-300/50 absolute -right-5 -top-5 -z-10 hidden size-36 rounded-full border lg:block"></div>
             </div>

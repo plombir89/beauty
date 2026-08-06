@@ -126,7 +126,7 @@
                     <article class="group">
                         <div class="relative">
                             @if ($item->image)
-                                <img src="{{ asset($item->image) }}" alt="" class="aspect-square w-full rounded-4xl object-cover shadow-soft transition-transform duration-700 group-hover:scale-[1.04]">
+                                <img src="{{ asset('storage/'.ltrim($item->image, '/')) }}" alt="" class="aspect-square w-full rounded-4xl object-cover shadow-soft transition-transform duration-700 group-hover:scale-[1.04]">
                             @endif
                             <span class="font-display text-gold-500/90 absolute -left-2 -top-4 text-6xl leading-none">
                                 0{{ $loop->iteration }}
