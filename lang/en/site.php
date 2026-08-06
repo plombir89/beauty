@@ -129,6 +129,12 @@ return [
             'buttons_label' => 'Pay booking deposit with PayPal',
         ],
     ],
+    'not_found' => [
+        'title' => 'Page not found',
+        'text' => 'The page you were looking for has moved or no longer exists.',
+        'home' => 'Go to homepage',
+        'services' => 'Browse services',
+    ],
     'blog' => [
         'all' => 'All posts',
     ],
