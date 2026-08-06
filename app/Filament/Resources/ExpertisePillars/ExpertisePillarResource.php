@@ -11,11 +11,13 @@ use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\TernaryFilter;
@@ -54,7 +56,14 @@ class ExpertisePillarResource extends Resource
                 Toggle::make('is_active')
                     ->default(true)
                     ->required(),
-                Fields::imageUpload('image', 'img/uploads/home'),
+                FileUpload::make('image')
+                    ->image()
+                    ->disk('public')
+                    ->directory('pillars')
+                    ->visibility('public')
+                    ->imageEditor()
+                    ->maxSize(4096)
+                    ->columnSpanFull(),
                 Fields::translations([
                     ['name' => 'title', 'label' => 'Title', 'required' => true],
                     ['name' => 'intro', 'label' => 'Intro', 'type' => 'textarea', 'rows' => 3, 'full' => true],
@@ -69,7 +78,11 @@ class ExpertisePillarResource extends Resource
     {
         return $table
             ->columns([
-                Fields::imageColumn(),
+                ImageColumn::make('image')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->imageHeight(56)
+                    ->square(),
                 TextColumn::make('title')
                     ->searchable()
                     ->sortable(),

@@ -2,24 +2,24 @@
 
 namespace App\Filament\Resources\HomeHeroBlocks;
 
-use App\Filament\Resources\HomeHeroBlocks\Pages\CreateHomeHeroBlock;
 use App\Filament\Resources\HomeHeroBlocks\Pages\EditHomeHeroBlock;
 use App\Filament\Resources\HomeHeroBlocks\Pages\ListHomeHeroBlocks;
 use App\Filament\Support\Fields;
 use App\Models\HomeHeroBlock;
 use BackedEnum;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use UnitEnum;
 
 class HomeHeroBlockResource extends Resource
@@ -38,6 +38,21 @@ class HomeHeroBlockResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'title';
 
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return false;
+    }
+
     public static function form(Schema $schema): Schema
     {
         return $schema
@@ -48,7 +63,13 @@ class HomeHeroBlockResource extends Resource
                 Toggle::make('is_active')
                     ->default(true)
                     ->required(),
-                Fields::imageUpload('image', 'img/uploads/home'),
+                FileUpload::make('image')
+                    ->image()
+                    ->disk('public')
+                    ->directory('home')
+                    ->visibility('public')
+                    ->imageEditor()
+                    ->maxSize(4096),
                 Fields::translations([
                     ['name' => 'eyebrow', 'label' => 'Eyebrow'],
                     ['name' => 'title', 'label' => 'Title', 'required' => true],
@@ -59,14 +80,18 @@ class HomeHeroBlockResource extends Resource
                     ['name' => 'stats', 'label' => 'Stats', 'type' => 'pairs', 'rows' => 4],
                 ]),
             ])
-            ->columns(2);
+            ->columns(3);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Fields::imageColumn(),
+                ImageColumn::make('image')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->imageHeight(56)
+                    ->square(),
                 TextColumn::make('title')
                     ->searchable()
                     ->sortable(),
@@ -79,11 +104,6 @@ class HomeHeroBlockResource extends Resource
             ])
             ->recordActions([
                 EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
@@ -91,7 +111,6 @@ class HomeHeroBlockResource extends Resource
     {
         return [
             'index' => ListHomeHeroBlocks::route('/'),
-            'create' => CreateHomeHeroBlock::route('/create'),
             'edit' => EditHomeHeroBlock::route('/{record}/edit'),
         ];
     }

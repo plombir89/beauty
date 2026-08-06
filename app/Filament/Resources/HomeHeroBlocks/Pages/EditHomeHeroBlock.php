@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\HomeHeroBlocks\Pages;
 
 use App\Filament\Resources\HomeHeroBlocks\HomeHeroBlockResource;
-use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditHomeHeroBlock extends EditRecord
@@ -12,8 +11,6 @@ class EditHomeHeroBlock extends EditRecord
 
     protected function getHeaderActions(): array
     {
-        return [
-            DeleteAction::make(),
-        ];
+        return [];
     }
 }

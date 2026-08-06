@@ -5,6 +5,7 @@ use App\Models\BlogPost;
 use App\Models\Certificate;
 use App\Models\CtaBlock;
 use App\Models\ExpertisePillar;
+use App\Models\HomeHeroBlock;
 use App\Models\Service;
 use App\Models\StudioProfile;
 use App\Models\WhyChooseUsItem;
@@ -75,6 +76,32 @@ test('service and certificate images render from public storage', function (): v
     $this->get('/en')
         ->assertOk()
         ->assertSee('storage/'.ltrim((string) $certificate->image, '/'), false);
+});
+
+test('home hero image renders from public storage', function (): void {
+    $hero = HomeHeroBlock::query()
+        ->active()
+        ->where('key', 'home')
+        ->firstOrFail();
+
+    expect($hero->image)->toStartWith('home/');
+
+    $this->get('/en')
+        ->assertOk()
+        ->assertSee('storage/'.ltrim((string) $hero->image, '/'), false);
+});
+
+test('expertise pillar images render from public storage', function (): void {
+    $pillar = ExpertisePillar::query()
+        ->active()
+        ->whereNotNull('image')
+        ->firstOrFail();
+
+    expect($pillar->image)->toStartWith('pillars/');
+
+    $this->get('/en')
+        ->assertOk()
+        ->assertSee('storage/'.ltrim((string) $pillar->image, '/'), false);
 });
 
 test('home page shows the main CTA block', function (): void {

@@ -223,7 +223,7 @@ class ElegantBeautySeeder extends Seeder
                         ['value' => '1h', 'label' => 'Ответ в течение часа'],
                     ],
                 ],
-                'image' => '/img/9.jpg',
+                'image' => 'home/9.jpg',
                 'is_active' => true,
             ],
         );
@@ -232,7 +232,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'areas',
                 'icon' => 'heart-handshake',
-                'image' => '/img/home/branding.jpg',
+                'image' => 'pillars/branding.jpg',
                 'title' => ['en' => 'Areas of expertise', 'ru' => 'Направления работы'],
                 'intro' => [
                     'en' => 'Our team holds in-depth knowledge, experience and skills in a number of specialised fields.',
@@ -264,7 +264,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'communication',
                 'icon' => 'messages-square',
-                'image' => '/img/home/communication.jpg',
+                'image' => 'pillars/communication.jpg',
                 'title' => ['en' => 'Communication', 'ru' => 'Коммуникация'],
                 'intro' => [
                     'en' => 'We build trusting relationships with every client - from the first call to follow-up care.',
@@ -291,7 +291,7 @@ class ElegantBeautySeeder extends Seeder
             [
                 'key' => 'strategy',
                 'icon' => 'target',
-                'image' => '/img/home/strategy.jpg',
+                'image' => 'pillars/strategy.jpg',
                 'title' => ['en' => 'Strategy & values', 'ru' => 'Стратегия и ценности'],
                 'intro' => [
                     'en' => 'Our strategy exists to help people gain confidence in themselves. Our values are respect, honesty, support and professionalism.',

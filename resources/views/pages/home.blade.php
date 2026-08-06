@@ -58,7 +58,7 @@
 
                 <div class="relative">
                     @if ($hero?->image)
-                        <img src="{{ asset($hero->image) }}" alt="{{ $hero->title }}" class="aspect-[4/5] w-full rounded-[3rem] object-cover shadow-lift sm:aspect-[5/6]">
+                        <img src="{{ asset('storage/'.ltrim($hero->image, '/')) }}" alt="{{ $hero->title }}" class="aspect-[4/5] w-full rounded-[3rem] object-cover shadow-lift sm:aspect-[5/6]">
                     @endif
 
                     <div class="border-sand-100 shadow-soft absolute -bottom-6 -left-4 hidden w-56 rounded-3xl border bg-white/95 p-5 backdrop-blur sm:block lg:-left-10">
@@ -85,7 +85,7 @@
                     @foreach ($expertisePillars as $pillar)
                         <article class="border-sand-100 shadow-soft hover:shadow-lift flex h-full flex-col overflow-hidden rounded-4xl border bg-white transition-shadow duration-500">
                             @if ($pillar->image)
-                                <img src="{{ asset($pillar->image) }}" alt="" class="aspect-[16/10] w-full object-cover">
+                                <img src="{{ asset('storage/'.ltrim($pillar->image, '/')) }}" alt="" class="aspect-[16/10] w-full object-cover">
                             @endif
 
                             <div class="flex flex-1 flex-col p-7">
