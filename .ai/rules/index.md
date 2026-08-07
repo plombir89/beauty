@@ -9,6 +9,7 @@ Before planning or editing, find the row whose globs match the file's path and r
 | app/Filament/Resources/CtaBlocks/** | .ai/rules/cta-blocks.md |
 | app/Filament/Resources/ExpertisePillars/** | .ai/rules/expertise-pillars.md |
 | app/Filament/Resources/HomeHeroBlocks/** | .ai/rules/home-hero-blocks.md |
+| app/Livewire/** | .ai/rules/livewire.md |
 | {app/Http/Controllers/AboutController.php,resources/views/pages/about.blade.php} | .ai/rules/pages.md |
 | {app/Support/Seo.php,resources/views/pages/**,resources/views/components/site/**,database/seeders/**} | .ai/rules/seeders.md |
 | app/Filament/Resources/{Services,Certificates}/** | .ai/rules/services-certificates.md |

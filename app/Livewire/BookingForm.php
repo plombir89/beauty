@@ -79,6 +79,10 @@ class BookingForm extends Component
         ], attributes: [
             'specialistId' => __('site.booking.specialist'),
             'serviceId' => __('site.booking.service'),
+            'name' => __('site.booking.name'),
+            'email' => __('site.booking.email'),
+            'phone' => __('site.booking.phone'),
+            'message' => __('site.booking.message'),
         ]);
 
         if (! $this->serviceBelongsToSpecialist()) {

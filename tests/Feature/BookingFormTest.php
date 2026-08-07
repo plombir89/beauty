@@ -20,6 +20,21 @@ test('booking form shows service before specialist', function (): void {
         ]);
 });
 
+test('booking form validation messages are localized in russian', function (): void {
+    app()->setLocale('ru');
+
+    Livewire::test(BookingForm::class)
+        ->call('submit')
+        ->assertHasErrors(['serviceId', 'specialistId', 'name', 'phone', 'email'])
+        ->assertSee('Поле «Услуга» обязательно.')
+        ->assertSee('Поле «Специалист» обязательно.')
+        ->assertSee('Поле «Имя» обязательно.')
+        ->assertSee('Поле «Телефон» обязательно.')
+        ->assertSee('Поле «Email» обязательно.')
+        ->assertDontSee('The Услуга field is required.')
+        ->assertDontSee('The name field is required.');
+});
+
 test('booking form stores request and queues email', function (): void {
     Mail::fake();
 
