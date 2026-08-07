@@ -156,7 +156,11 @@
             <div class="mx-auto w-full max-w-7xl px-5 sm:px-8">
                 <div>
                     <h2 class="text-3xl font-light sm:text-4xl">{{ $policy->title }}</h2>
-                    <p class="text-ink-soft mt-4 max-w-3xl leading-relaxed">{{ $policy->intro }}</p>
+                    @if ($policy->intro)
+                        <div class="about-rich-content mt-4 max-w-3xl">
+                            {{ \App\Support\SiteRichContentRenderer::render($policy->intro) }}
+                        </div>
+                    @endif
                 </div>
 
                 <div class="mt-10 grid gap-6 md:grid-cols-3">
@@ -164,7 +168,11 @@
                         <article class="border-sand-100 shadow-soft rounded-4xl border bg-white p-7">
                             <span class="bg-blush-50 text-plum-600 grid size-11 place-items-center rounded-2xl">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
                             <h3 class="mt-5 text-xl font-medium">{{ $item->title }}</h3>
-                            <p class="text-ink-soft mt-3 text-sm leading-relaxed">{{ $item->text }}</p>
+                            @if ($item->text)
+                                <div class="compact-rich-content mt-3">
+                                    {{ \App\Support\SiteRichContentRenderer::render($item->text) }}
+                                </div>
+                            @endif
                         </article>
                     @endforeach
                 </div>

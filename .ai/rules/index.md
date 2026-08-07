@@ -6,6 +6,8 @@ Before planning or editing, find the row whose globs match the file's path and r
 | --- | --- |
 | app/Filament/Resources/AboutPageContents/** | .ai/rules/about-page-contents.md |
 | app/Filament/Resources/{BlogPosts,AboutTeasers,Pages,Services}/** | .ai/rules/blog-posts-about-teasers-pages-services.md |
+| app/Filament/Resources/{ContactPolicies,ContactPolicyItems}/** | .ai/rules/contact-policies-contact-policy-items.md |
+| app/Http/Controllers/ContactController.php | .ai/rules/controllers.md |
 | app/Filament/Resources/CtaBlocks/** | .ai/rules/cta-blocks.md |
 | app/Filament/Resources/ExpertisePillars/** | .ai/rules/expertise-pillars.md |
 | app/Filament/Resources/HomeHeroBlocks/** | .ai/rules/home-hero-blocks.md |

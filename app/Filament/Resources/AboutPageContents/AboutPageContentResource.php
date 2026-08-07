@@ -77,7 +77,7 @@ class AboutPageContentResource extends Resource
                     ['name' => 'title', 'label' => 'Title', 'required' => true],
                     ['name' => 'lead', 'label' => 'Lead', 'type' => 'textarea', 'rows' => 3, 'full' => true],
                     ['name' => 'text', 'label' => 'Text', 'type' => 'rich-editor', 'fileAttachmentsDirectory' => 'about/content', 'customBlocks' => [YouTubeVideoBlock::class], 'full' => true],
-                    ['name' => 'text2', 'label' => 'Second text', 'type' => 'textarea', 'rows' => 5, 'full' => true],
+                    ['name' => 'text2', 'label' => 'Second text', 'type' => 'rich-editor', 'fileAttachmentsDirectory' => 'about/content', 'customBlocks' => [YouTubeVideoBlock::class], 'full' => true],
                 ]),
             ])
             ->columns(2);

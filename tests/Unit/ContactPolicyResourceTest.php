@@ -1,35 +1,40 @@
 <?php
 
-use App\Filament\Resources\Specialists\SpecialistResource;
-use Filament\Forms\Components\FileUpload;
+use App\Filament\Resources\ContactPolicies\ContactPolicyResource;
+use App\Filament\Resources\ContactPolicyItems\ContactPolicyItemResource;
 use Filament\Forms\Components\RichEditor;
 use Filament\Schemas\Schema;
 use Tests\TestCase;
 
 uses(TestCase::class);
 
-test('specialist form uploads images to public specialists storage', function (): void {
-    $schema = SpecialistResource::form(Schema::make());
-    $upload = collect($schema->getComponents())
-        ->first(fn (object $component): bool => $component instanceof FileUpload);
-
-    expect($upload)->toBeInstanceOf(FileUpload::class)
-        ->and($upload->getDiskName())->toBe('public')
-        ->and($upload->getDirectory())->toBe('specialists');
-});
-
-test('specialist bio fields use rich editor with public specialist attachments', function (): void {
-    $schema = SpecialistResource::form(Schema::make());
-    $editors = collect(specialistResourceTestFlattenComponents($schema->getComponents()))
+test('contact policy intro and item text fields use rich editor with public contact attachments', function (): void {
+    $schema = ContactPolicyResource::form(Schema::make());
+    $editors = collect(contactPolicyResourceTestFlattenComponents($schema->getComponents()))
         ->filter(fn (object $component): bool => $component instanceof RichEditor)
         ->values();
 
-    expect($editors->map(fn (RichEditor $editor): ?string => specialistResourceTestStatePath($editor))->all())
-        ->toContain('bio.en', 'bio.ru');
+    expect($editors->map(fn (RichEditor $editor): ?string => contactPolicyResourceTestStatePath($editor))->all())
+        ->toContain('intro.en', 'intro.ru', 'text.en', 'text.ru');
 
     $editors->each(function (RichEditor $editor): void {
         expect($editor->getFileAttachmentsDiskName())->toBe('public')
-            ->and($editor->getFileAttachmentsDirectory())->toBe('specialists/content');
+            ->and($editor->getFileAttachmentsDirectory())->toBe('contact/content');
+    });
+});
+
+test('contact policy item text fields use rich editor with public contact attachments', function (): void {
+    $schema = ContactPolicyItemResource::form(Schema::make());
+    $editors = collect(contactPolicyResourceTestFlattenComponents($schema->getComponents()))
+        ->filter(fn (object $component): bool => $component instanceof RichEditor)
+        ->values();
+
+    expect($editors->map(fn (RichEditor $editor): ?string => contactPolicyResourceTestStatePath($editor))->all())
+        ->toContain('text.en', 'text.ru');
+
+    $editors->each(function (RichEditor $editor): void {
+        expect($editor->getFileAttachmentsDiskName())->toBe('public')
+            ->and($editor->getFileAttachmentsDirectory())->toBe('contact/content');
     });
 });
 
@@ -37,14 +42,14 @@ test('specialist bio fields use rich editor with public specialist attachments',
  * @param  array<int, object>  $components
  * @return array<int, object>
  */
-function specialistResourceTestFlattenComponents(array $components): array
+function contactPolicyResourceTestFlattenComponents(array $components): array
 {
     $flat = [];
 
     foreach ($components as $component) {
         $flat[] = $component;
 
-        $flat = array_merge($flat, specialistResourceTestFlattenComponents(specialistResourceTestChildComponents($component)));
+        $flat = array_merge($flat, contactPolicyResourceTestFlattenComponents(contactPolicyResourceTestChildComponents($component)));
     }
 
     return $flat;
@@ -53,7 +58,7 @@ function specialistResourceTestFlattenComponents(array $components): array
 /**
  * @return array<int, object>
  */
-function specialistResourceTestChildComponents(object $component): array
+function contactPolicyResourceTestChildComponents(object $component): array
 {
     $class = new ReflectionClass($component);
 
@@ -80,7 +85,7 @@ function specialistResourceTestChildComponents(object $component): array
     return [];
 }
 
-function specialistResourceTestStatePath(object $component): ?string
+function contactPolicyResourceTestStatePath(object $component): ?string
 {
     $class = new ReflectionClass($component);
 

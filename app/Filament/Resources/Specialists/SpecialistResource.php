@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Specialists;
 
+use App\Filament\Forms\Components\RichEditor\RichContentCustomBlocks\YouTubeVideoBlock;
 use App\Filament\Resources\Specialists\Pages\CreateSpecialist;
 use App\Filament\Resources\Specialists\Pages\EditSpecialist;
 use App\Filament\Resources\Specialists\Pages\ListSpecialists;
@@ -66,7 +67,7 @@ class SpecialistResource extends Resource
                     ['name' => 'slug', 'label' => 'Slug', 'required' => true],
                     ['name' => 'name', 'label' => 'Name', 'required' => true],
                     ['name' => 'title', 'label' => 'Title'],
-                    ['name' => 'bio', 'label' => 'Bio', 'type' => 'textarea', 'rows' => 5, 'full' => true],
+                    ['name' => 'bio', 'label' => 'Bio', 'type' => 'rich-editor', 'fileAttachmentsDirectory' => 'specialists/content', 'customBlocks' => [YouTubeVideoBlock::class], 'full' => true],
                 ]),
             ])
             ->columns(2);

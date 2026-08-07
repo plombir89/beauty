@@ -37,7 +37,11 @@
                         </div>
                     @endif
 
-                    <p class="text-ink-soft text-lg leading-relaxed">{{ $content->text2 }}</p>
+                    @if ($content->text2)
+                        <div class="about-rich-content">
+                            {{ \App\Support\SiteRichContentRenderer::render($content->text2) }}
+                        </div>
+                    @endif
                 </div>
             </div>
         </section>
@@ -71,7 +75,9 @@
                                 <h3 class="mt-4 text-2xl font-medium">{{ $specialist->name }}</h3>
 
                                 @if ($specialist->bio)
-                                    <p class="text-ink-soft mt-3 text-sm leading-relaxed">{{ $specialist->bio }}</p>
+                                    <div class="compact-rich-content mt-3">
+                                        {{ \App\Support\SiteRichContentRenderer::render($specialist->bio) }}
+                                    </div>
                                 @endif
 
                                 @if ($specialist->services->isNotEmpty())

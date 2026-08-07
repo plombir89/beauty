@@ -42,7 +42,11 @@ class ContactController extends Controller
             'socialLinks' => SocialLink::active()->ordered()->get(),
             'businessHours' => BusinessHour::active()->ordered()->get(),
             'depositSetting' => DepositSetting::active()->first(),
-            'policy' => ContactPolicy::query()->with('items')->active()->where('key', 'booking')->first(),
+            'policy' => ContactPolicy::query()
+                ->with(['items' => fn ($query) => $query->active()])
+                ->active()
+                ->where('key', 'main')
+                ->first(),
             'initialServiceId' => $initialServiceId,
         ]);
     }

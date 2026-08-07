@@ -5,6 +5,7 @@ use App\Models\AboutTeaser;
 use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use App\Models\Certificate;
+use App\Models\ContactPolicy;
 use App\Models\CtaBlock;
 use App\Models\ExpertisePillar;
 use App\Models\HomeHeroBlock;
@@ -166,13 +167,19 @@ test('about page content rich text renders as html', function (): void {
         'en' => '<p><strong>Rich care copy</strong></p>',
         'ru' => '<p><strong>Расширенный текст</strong></p>',
     ]);
+    $content->setTranslations('text2', [
+        'en' => '<p><em>Second rich care copy</em></p>',
+        'ru' => '<p><em>Второй расширенный текст</em></p>',
+    ]);
     $content->save();
 
     $this->get('/en/about')
         ->assertOk()
         ->assertSee('about-rich-content', false)
         ->assertSee('<strong>Rich care copy</strong>', false)
-        ->assertDontSee(e('<strong>Rich care copy</strong>'), false);
+        ->assertSee('<em>Second rich care copy</em>', false)
+        ->assertDontSee(e('<strong>Rich care copy</strong>'), false)
+        ->assertDontSee(e('<em>Second rich care copy</em>'), false);
 });
 
 test('home about teaser image renders from public storage', function (): void {
@@ -228,6 +235,11 @@ test('about page renders active team specialists with storage images', function 
         ->firstOrFail();
 
     $specialist->update(['image' => 'specialists/team-member.jpg']);
+    $specialist->setTranslations('bio', [
+        'en' => '<p><strong>Specialist rich bio</strong></p>',
+        'ru' => '<p><strong>Описание специалиста</strong></p>',
+    ]);
+    $specialist->save();
 
     $service = $specialist->services->firstOrFail();
 
@@ -237,7 +249,37 @@ test('about page renders active team specialists with storage images', function 
         ->assertSee($specialist->getTranslation('name', 'en'))
         ->assertSee($specialist->getTranslation('title', 'en'))
         ->assertSee($service->getTranslation('title', 'en'))
+        ->assertSee('<strong>Specialist rich bio</strong>', false)
+        ->assertDontSee(e('<strong>Specialist rich bio</strong>'), false)
         ->assertSee('storage/specialists/team-member.jpg', false);
+});
+
+test('contact policy rich text renders as html', function (): void {
+    $policy = ContactPolicy::query()
+        ->with('items')
+        ->active()
+        ->where('key', 'main')
+        ->firstOrFail();
+    $item = $policy->items->firstOrFail();
+
+    $policy->setTranslations('intro', [
+        'en' => '<p><strong>Policy rich intro</strong></p>',
+        'ru' => '<p><strong>Текст политики</strong></p>',
+    ]);
+    $policy->save();
+
+    $item->setTranslations('text', [
+        'en' => '<p><em>Policy item rich text</em></p>',
+        'ru' => '<p><em>Пункт политики</em></p>',
+    ]);
+    $item->save();
+
+    $this->get('/en/contact')
+        ->assertOk()
+        ->assertSee('<strong>Policy rich intro</strong>', false)
+        ->assertSee('<em>Policy item rich text</em>', false)
+        ->assertDontSee(e('<strong>Policy rich intro</strong>'), false)
+        ->assertDontSee(e('<em>Policy item rich text</em>'), false);
 });
 
 test('home page shows the main CTA block', function (): void {

@@ -26,7 +26,7 @@ test('about page content text fields use rich editor with public about attachmen
         ->values();
 
     expect($editors->map(fn (RichEditor $editor): ?string => aboutPageContentResourceTestStatePath($editor))->all())
-        ->toContain('text.en', 'text.ru');
+        ->toContain('text.en', 'text.ru', 'text2.en', 'text2.ru');
 
     $editors->each(function (RichEditor $editor): void {
         expect($editor->getFileAttachmentsDiskName())->toBe('public')

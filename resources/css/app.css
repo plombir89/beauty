@@ -197,16 +197,30 @@
         font-size: 0.95rem;
     }
 
+    .compact-rich-content {
+        @apply text-ink-soft text-sm leading-relaxed;
+    }
+
     .about-rich-content > * + *,
     .blog-rich-content > * + *,
     .service-rich-content > * + * {
         margin-top: 1.25rem;
     }
 
+    .compact-rich-content > * + * {
+        margin-top: 0.75rem;
+    }
+
     .about-rich-content h2,
     .blog-rich-content h2,
     .service-rich-content h2 {
         @apply text-3xl font-light leading-tight;
+    }
+
+    .compact-rich-content h2,
+    .compact-rich-content h3,
+    .compact-rich-content h4 {
+        @apply text-ink text-base font-medium leading-snug;
     }
 
     .about-rich-content h3,
@@ -226,25 +240,30 @@
     .blog-rich-content ul,
     .blog-rich-content ol,
     .service-rich-content ul,
-    .service-rich-content ol {
+    .service-rich-content ol,
+    .compact-rich-content ul,
+    .compact-rich-content ol {
         @apply grid gap-2 pl-6;
     }
 
     .about-rich-content ul,
     .blog-rich-content ul,
-    .service-rich-content ul {
+    .service-rich-content ul,
+    .compact-rich-content ul {
         list-style: disc;
     }
 
     .about-rich-content ol,
     .blog-rich-content ol,
-    .service-rich-content ol {
+    .service-rich-content ol,
+    .compact-rich-content ol {
         list-style: decimal;
     }
 
     .about-rich-content a:not(.youtube-video-block),
     .blog-rich-content a:not(.youtube-video-block),
-    .service-rich-content a:not(.youtube-video-block) {
+    .service-rich-content a:not(.youtube-video-block),
+    .compact-rich-content a:not(.youtube-video-block) {
         @apply text-plum-700 underline decoration-plum-200 underline-offset-4 transition-colors hover:text-plum-900;
     }
 
@@ -256,6 +275,10 @@
     .blog-youtube-video iframe,
     .site-youtube-video iframe {
         @apply h-full w-full;
+    }
+
+    .compact-rich-content .site-youtube-video {
+        @apply my-4 rounded-2xl;
     }
 }
 

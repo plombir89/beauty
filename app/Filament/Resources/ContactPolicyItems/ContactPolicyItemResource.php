@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ContactPolicyItems;
 
+use App\Filament\Forms\Components\RichEditor\RichContentCustomBlocks\YouTubeVideoBlock;
 use App\Filament\Resources\ContactPolicyItems\Pages\CreateContactPolicyItem;
 use App\Filament\Resources\ContactPolicyItems\Pages\EditContactPolicyItem;
 use App\Filament\Resources\ContactPolicyItems\Pages\ListContactPolicyItems;
@@ -59,7 +60,7 @@ class ContactPolicyItemResource extends Resource
                     ->required(),
                 Fields::translations([
                     ['name' => 'title', 'label' => 'Title', 'required' => true],
-                    ['name' => 'text', 'label' => 'Text', 'type' => 'textarea', 'rows' => 4, 'full' => true],
+                    ['name' => 'text', 'label' => 'Text', 'type' => 'rich-editor', 'fileAttachmentsDirectory' => 'contact/content', 'customBlocks' => [YouTubeVideoBlock::class], 'full' => true],
                 ]),
             ])
             ->columns(4);
