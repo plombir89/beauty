@@ -1,24 +1,6 @@
 <form wire:submit="submit" noValidate class="border-sand-100 shadow-soft rounded-4xl border bg-white p-6 sm:p-9">
     <div class="flex flex-col gap-5">
         <div class="flex flex-col gap-2">
-            <label for="booking-specialist" class="text-ink text-xs font-semibold uppercase tracking-[0.12em]">
-                {{ __('site.booking.specialist') }} <span class="text-blush-500" aria-hidden="true">*</span>
-            </label>
-            <div class="relative">
-                <select id="booking-specialist" wire:model.live="specialistId" required aria-invalid="@error('specialistId') true @else false @enderror" class="w-full cursor-pointer appearance-none rounded-2xl border bg-white/90 px-4 py-3.5 pr-11 text-sm text-ink transition-colors duration-200 focus:bg-white focus:outline-none @error('specialistId') border-blush-500 focus:border-blush-500 @else border-sand-200 hover:border-sand-300 focus:border-plum-400 @enderror">
-                    <option value="">{{ __('site.booking.select_specialist') }}</option>
-                    @foreach ($specialists as $specialist)
-                        <option wire:key="booking-specialist-{{ $specialist->id }}" value="{{ $specialist->id }}">{{ $specialist->name }}</option>
-                    @endforeach
-                </select>
-                <span aria-hidden="true" class="border-ink-soft pointer-events-none absolute right-5 top-1/2 size-2 -translate-y-2/3 rotate-45 border-b border-r"></span>
-            </div>
-            @error('specialistId')
-                <p role="alert" class="text-blush-500 text-xs">{{ $message }}</p>
-            @enderror
-        </div>
-
-        <div class="flex flex-col gap-2">
             <label for="booking-service" class="text-ink text-xs font-semibold uppercase tracking-[0.12em]">
                 {{ __('site.booking.service') }} <span class="text-blush-500" aria-hidden="true">*</span>
             </label>
@@ -33,10 +15,29 @@
             </div>
             @if ($specialistId)
                 <p class="text-ink-faint text-xs">{{ __('site.booking.service_filtered') }}</p>
-            @elseif ($serviceId)
-                <p class="text-ink-faint text-xs">{{ __('site.booking.specialist_filtered') }}</p>
             @endif
             @error('serviceId')
+                <p role="alert" class="text-blush-500 text-xs">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div class="flex flex-col gap-2">
+            <label for="booking-specialist" class="text-ink text-xs font-semibold uppercase tracking-[0.12em]">
+                {{ __('site.booking.specialist') }} <span class="text-blush-500" aria-hidden="true">*</span>
+            </label>
+            <div class="relative">
+                <select id="booking-specialist" wire:model.live="specialistId" required aria-invalid="@error('specialistId') true @else false @enderror" class="w-full cursor-pointer appearance-none rounded-2xl border bg-white/90 px-4 py-3.5 pr-11 text-sm text-ink transition-colors duration-200 focus:bg-white focus:outline-none @error('specialistId') border-blush-500 focus:border-blush-500 @else border-sand-200 hover:border-sand-300 focus:border-plum-400 @enderror">
+                    <option value="">{{ __('site.booking.select_specialist') }}</option>
+                    @foreach ($specialists as $specialist)
+                        <option wire:key="booking-specialist-{{ $specialist->id }}" value="{{ $specialist->id }}">{{ $specialist->name }}</option>
+                    @endforeach
+                </select>
+                <span aria-hidden="true" class="border-ink-soft pointer-events-none absolute right-5 top-1/2 size-2 -translate-y-2/3 rotate-45 border-b border-r"></span>
+            </div>
+            @if ($serviceId)
+                <p class="text-ink-faint text-xs">{{ __('site.booking.specialist_filtered') }}</p>
+            @endif
+            @error('specialistId')
                 <p role="alert" class="text-blush-500 text-xs">{{ $message }}</p>
             @enderror
         </div>

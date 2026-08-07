@@ -41,7 +41,7 @@
                     <ul class="flex items-center gap-1">
                         @foreach ($navItems as $item)
                             <li>
-                                <a href="{{ $item['url'] }}" class="relative rounded-full px-4 py-2 text-sm transition-colors duration-200 {{ $item['active'] ? 'font-semibold text-plum-700' : 'text-ink-soft hover:text-plum-700' }}">
+                                <a href="{{ $item['url'] }}" class="relative rounded-full px-4 py-2 text-md transition-colors duration-200 {{ $item['active'] ? 'font-semibold text-plum-700' : 'text-ink-soft hover:text-plum-700' }}">
                                     {{ $item['label'] }}
                                     @if ($item['active'])
                                         <span aria-hidden="true" class="absolute inset-x-4 -bottom-0.5 h-px bg-gold-400"></span>
@@ -54,7 +54,7 @@
 
                 <div class="flex items-center gap-2 sm:gap-3">
                     @if ($studio?->phone)
-                        <a href="{{ $studio->phone_href }}" class="text-ink-soft hover:text-plum-700 hidden items-center gap-2 text-sm font-medium transition-colors xl:inline-flex">
+                        <a href="{{ $studio->phone_href }}" class="text-ink-soft hover:text-plum-700 hidden items-center gap-2 text-md font-medium transition-colors xl:inline-flex">
                             <x-site.contact-icon name="phone" class="size-4" />
                             {{ $studio->phone }}
                         </a>

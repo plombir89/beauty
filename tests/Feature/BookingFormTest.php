@@ -12,6 +12,14 @@ beforeEach(function (): void {
     $this->seed(ElegantBeautySeeder::class);
 });
 
+test('booking form shows service before specialist', function (): void {
+    Livewire::test(BookingForm::class)
+        ->assertSeeInOrder([
+            __('site.booking.service'),
+            __('site.booking.specialist'),
+        ]);
+});
+
 test('booking form stores request and queues email', function (): void {
     Mail::fake();
 
