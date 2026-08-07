@@ -125,6 +125,24 @@ test('why choose images render from public storage', function (): void {
         ->assertSee('storage/'.ltrim((string) $item->image, '/'), false);
 });
 
+test('why choose detail rich text renders as html', function (): void {
+    $item = WhyChooseUsItem::query()
+        ->active()
+        ->firstOrFail();
+
+    $item->setTranslations('body', [
+        'en' => '<p><strong>Rich reason copy</strong></p>',
+        'ru' => '<p><strong>Расширенный текст причины</strong></p>',
+    ]);
+    $item->save();
+
+    $this->get(route('en.why.show', ['itemSlug' => $item->getTranslation('slug', 'en')]))
+        ->assertOk()
+        ->assertSee('blog-rich-content', false)
+        ->assertSee('<strong>Rich reason copy</strong>', false)
+        ->assertDontSee(e('<strong>Rich reason copy</strong>'), false);
+});
+
 test('about page content image renders from public storage', function (): void {
     $content = AboutPageContent::query()
         ->active()

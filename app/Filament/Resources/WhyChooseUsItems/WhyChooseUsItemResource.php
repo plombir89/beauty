@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\WhyChooseUsItems;
 
+use App\Filament\Forms\Components\RichEditor\RichContentCustomBlocks\YouTubeVideoBlock;
 use App\Filament\Resources\WhyChooseUsItems\Pages\CreateWhyChooseUsItem;
 use App\Filament\Resources\WhyChooseUsItems\Pages\EditWhyChooseUsItem;
 use App\Filament\Resources\WhyChooseUsItems\Pages\ListWhyChooseUsItems;
@@ -67,7 +68,7 @@ class WhyChooseUsItemResource extends Resource
                     ['name' => 'title', 'label' => 'Title', 'required' => true, 'slugTarget' => 'slug'],
                     ['name' => 'slug', 'label' => 'Slug', 'required' => true],
                     ['name' => 'summary', 'label' => 'Summary', 'type' => 'textarea', 'rows' => 3, 'full' => true],
-                    ['name' => 'body', 'label' => 'Body paragraphs', 'type' => 'lines', 'rows' => 10],
+                    ['name' => 'body', 'label' => 'Body', 'type' => 'rich-editor', 'fileAttachmentsDirectory' => 'choose/content', 'customBlocks' => [YouTubeVideoBlock::class], 'full' => true],
                 ]),
             ])
             ->columns(4);

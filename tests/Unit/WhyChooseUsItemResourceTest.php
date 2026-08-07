@@ -1,10 +1,15 @@
 <?php
 
+use App\Filament\Resources\WhyChooseUsItems\Pages\EditWhyChooseUsItem;
 use App\Filament\Resources\WhyChooseUsItems\WhyChooseUsItemResource;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
+use Tests\TestCase;
+
+uses(TestCase::class);
 
 test('why choose title fields generate locale slugs and appear before slug fields', function (): void {
     $schema = WhyChooseUsItemResource::form(Schema::make());
@@ -21,6 +26,62 @@ test('why choose title fields generate locale slugs and appear before slug field
         ->and(titleFieldHasSlugGeneration($localeTabs[0]))->toBeTrue()
         ->and(titleFieldHasSlugGeneration($localeTabs[1]))->toBeTrue();
 });
+
+test('why choose body fields use rich editor with public choose attachments', function (): void {
+    $schema = WhyChooseUsItemResource::form(Schema::make());
+    $editors = collect(whyChooseUsItemResourceTestFlattenComponents($schema->getComponents()))
+        ->filter(fn (object $component): bool => $component instanceof RichEditor)
+        ->values();
+
+    expect($editors->map(fn (RichEditor $editor): ?string => componentStatePath($editor))->all())
+        ->toContain('body.en', 'body.ru');
+
+    $editors->each(function (RichEditor $editor): void {
+        expect($editor->getFileAttachmentsDiskName())->toBe('public')
+            ->and($editor->getFileAttachmentsDirectory())->toBe('choose/content');
+    });
+});
+
+test('why choose edit page converts legacy body paragraphs before filling rich editor', function (): void {
+    $data = whyChooseUsItemResourceTestMutateFormDataBeforeFill([
+        'body' => [
+            'en' => ['First paragraph', 'Second <unsafe> paragraph'],
+            'ru' => '<p>Готовый rich text</p>',
+        ],
+    ]);
+
+    expect($data['body']['en'])->toBe('<p>First paragraph</p><p>Second &lt;unsafe&gt; paragraph</p>')
+        ->and($data['body']['ru'])->toBe('<p>Готовый rich text</p>');
+});
+
+/**
+ * @param  array<string, mixed>  $data
+ * @return array<string, mixed>
+ */
+function whyChooseUsItemResourceTestMutateFormDataBeforeFill(array $data): array
+{
+    $page = new EditWhyChooseUsItem;
+    $method = new ReflectionMethod($page, 'mutateFormDataBeforeFill');
+    $method->setAccessible(true);
+
+    return $method->invoke($page, $data);
+}
+
+/**
+ * @param  array<int, object>  $components
+ * @return array<int, object>
+ */
+function whyChooseUsItemResourceTestFlattenComponents(array $components): array
+{
+    $flat = [];
+
+    foreach ($components as $component) {
+        $flat[] = $component;
+        $flat = array_merge($flat, whyChooseUsItemResourceTestFlattenComponents(defaultChildComponents($component)));
+    }
+
+    return $flat;
+}
 
 /**
  * @return array<int, object>

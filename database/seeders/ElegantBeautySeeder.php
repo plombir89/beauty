@@ -334,14 +334,8 @@ class ElegantBeautySeeder extends Seeder
                     'ru' => 'В Elegant Beauty Studio работает команда, преданная своему делу.',
                 ],
                 'body' => [
-                    'en' => [
-                        'Elegant Beauty Studio employs a team that is passionate about its work. Each specialist has real experience and keeps improving to give you the highest level of service.',
-                        'We combine technical skill with sincere care, so each visit feels precise, calm and personal.',
-                    ],
-                    'ru' => [
-                        'В Elegant Beauty Studio работает команда, преданная своему делу. У каждого специалиста есть реальный опыт, и все постоянно совершенствуются, чтобы оказывать услуги на высшем уровне.',
-                        'Мы соединяем профессиональные навыки с искренней заботой, чтобы каждый визит был точным, спокойным и персональным.',
-                    ],
+                    'en' => '<p>Elegant Beauty Studio employs a team that is passionate about its work. Each specialist has real experience and keeps improving to give you the highest level of service.</p><p>We combine technical skill with sincere care, so each visit feels precise, calm and personal.</p>',
+                    'ru' => '<p>В Elegant Beauty Studio работает команда, преданная своему делу. У каждого специалиста есть реальный опыт, и все постоянно совершенствуются, чтобы оказывать услуги на высшем уровне.</p><p>Мы соединяем профессиональные навыки с искренней заботой, чтобы каждый визит был точным, спокойным и персональным.</p>',
                 ],
             ],
             [
@@ -355,14 +349,8 @@ class ElegantBeautySeeder extends Seeder
                     'ru' => 'Мы работаем с продуктами высокого качества: исключительный результат и дополнительный уход.',
                 ],
                 'body' => [
-                    'en' => [
-                        'We work with high-quality products that offer exceptional results, unique formulations and additional care that standard products simply cannot provide.',
-                        'Products are selected around skin condition, sensitivity and the treatment goal, not around one fixed protocol.',
-                    ],
-                    'ru' => [
-                        'Мы работаем с продуктами высокого качества: исключительный результат, уникальные формулы и дополнительный уход, который недоступен стандартным средствам.',
-                        'Средства подбираются под состояние кожи, чувствительность и цель процедуры, а не под один универсальный протокол.',
-                    ],
+                    'en' => '<p>We work with high-quality products that offer exceptional results, unique formulations and additional care that standard products simply cannot provide.</p><p>Products are selected around skin condition, sensitivity and the treatment goal, not around one fixed protocol.</p>',
+                    'ru' => '<p>Мы работаем с продуктами высокого качества: исключительный результат, уникальные формулы и дополнительный уход, который недоступен стандартным средствам.</p><p>Средства подбираются под состояние кожи, чувствительность и цель процедуры, а не под один универсальный протокол.</p>',
                 ],
             ],
             [
@@ -376,14 +364,8 @@ class ElegantBeautySeeder extends Seeder
                     'ru' => 'Мягкие тона, природные материалы, тёплый свет, лёгкие ароматы и спокойная музыка.',
                 ],
                 'body' => [
-                    'en' => [
-                        'Soft colours, natural materials, warm lighting, light aromas and calm music. We pay attention to the details so that every client feels completely at home.',
-                        'The space is designed to feel private, quiet and supportive before, during and after the procedure.',
-                    ],
-                    'ru' => [
-                        'Мягкие тона, природные материалы, тёплый свет, лёгкие ароматы и спокойная музыка. Мы продумываем детали, чтобы каждый гость чувствовал себя как дома.',
-                        'Пространство создано так, чтобы до, во время и после процедуры было спокойно, приватно и комфортно.',
-                    ],
+                    'en' => '<p>Soft colours, natural materials, warm lighting, light aromas and calm music. We pay attention to the details so that every client feels completely at home.</p><p>The space is designed to feel private, quiet and supportive before, during and after the procedure.</p>',
+                    'ru' => '<p>Мягкие тона, природные материалы, тёплый свет, лёгкие ароматы и спокойная музыка. Мы продумываем детали, чтобы каждый гость чувствовал себя как дома.</p><p>Пространство создано так, чтобы до, во время и после процедуры было спокойно, приватно и комфортно.</p>',
                 ],
             ],
         ];
