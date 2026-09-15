@@ -41,9 +41,9 @@ class BookingRequestResource extends Resource
         return $schema
             ->components([
                 Fields::relationshipSelect('specialist_id', 'specialist', 'name', 'Specialist')
-                    ->required(),
+                    ->nullable(),
                 Fields::relationshipSelect('service_id', 'service', 'title', 'Service')
-                    ->required(),
+                    ->nullable(),
                 Select::make('locale')
                     ->options([
                         'en' => 'English',
@@ -96,9 +96,11 @@ class BookingRequestResource extends Resource
                     ->searchable(),
                 TextColumn::make('specialist.name')
                     ->label('Specialist')
+                    ->placeholder('Not assigned')
                     ->searchable(),
                 TextColumn::make('service.title')
                     ->label('Service')
+                    ->placeholder('Not selected')
                     ->searchable(),
                 TextColumn::make('status')
                     ->badge()
@@ -124,6 +126,18 @@ class BookingRequestResource extends Resource
                     DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) BookingRequest::query()
+            ->where('status', BookingRequest::StatusPending)
+            ->count();
+    }
+
+    public static function getNavigationBadgeColor(): string|array|null
+    {
+        return 'danger';
     }
 
     /**

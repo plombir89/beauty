@@ -80,11 +80,11 @@ return [
     ],
     'booking' => [
         'title' => 'Request an appointment',
-        'intro' => 'Choose a specialist and service, then leave your contacts. We will confirm the appointment personally.',
+        'intro' => 'Choose a service if you know it, then leave your contacts. We will confirm the appointment personally.',
         'specialist' => 'Specialist',
         'service' => 'Service',
         'select_specialist' => 'Select a specialist',
-        'select_service' => 'Select a service',
+        'select_service' => 'Select a service (optional)',
         'name' => 'Name',
         'email' => 'Email',
         'phone' => 'Phone',

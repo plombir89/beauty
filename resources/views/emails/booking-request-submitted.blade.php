@@ -7,9 +7,9 @@
 
 **Email:** {{ $bookingRequest->email }}
 
-**Specialist:** {{ $bookingRequest->specialist?->name }}
+**Specialist:** {{ $bookingRequest->specialist?->name ?? 'Not assigned' }}
 
-**Service:** {{ $bookingRequest->service?->title }}
+**Service:** {{ $bookingRequest->service?->title ?? 'Not selected' }}
 
 **Locale:** {{ strtoupper($bookingRequest->locale) }}
 
