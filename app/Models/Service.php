@@ -30,6 +30,7 @@ class Service extends Model
         'skin_type',
         'note',
         'image',
+        'detail_image',
         'is_featured',
         'featured_sort_order',
         'sort_order',

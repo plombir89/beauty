@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    @php($locale = app()->getLocale())
+    @php
+        $locale = app()->getLocale();
+        $detailImage = $detailImage ?? ($service->detail_image ?: $service->image);
+    @endphp
 
     <div class="from-blush-50 to-cream bg-gradient-to-b pb-20 pt-8">
         <div class="mx-auto w-full max-w-7xl px-5 sm:px-8">
@@ -11,8 +14,8 @@
 
             <div class="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16">
                 <div>
-                    @if ($service->image)
-                        <img src="{{ asset('storage/'.ltrim($service->image, '/')) }}" alt="{{ $service->title }}" class="aspect-[4/5] w-full rounded-[2.5rem] object-cover shadow-lift lg:sticky lg:top-28">
+                    @if ($detailImage)
+                        <img src="{{ asset('storage/'.ltrim($detailImage, '/')) }}" alt="{{ $service->title }}" class="aspect-[4/5] w-full rounded-[2.5rem] object-cover shadow-lift lg:sticky lg:top-28">
                     @endif
                 </div>
 

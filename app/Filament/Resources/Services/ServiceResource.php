@@ -78,6 +78,18 @@ class ServiceResource extends Resource
                                     ->columnSpanFull(),
                             ]),
                         FileUpload::make('image')
+                            ->label('Services page image')
+                            ->helperText('Shown in service cards and on the services page.')
+                            ->image()
+                            ->disk('public')
+                            ->directory('services')
+                            ->visibility('public')
+                            ->imageEditor()
+                            ->maxSize(4096)
+                            ->columnSpan(1),
+                        FileUpload::make('detail_image')
+                            ->label('Service detail image')
+                            ->helperText('Shown on the opened service page. If empty, the services page image is used.')
                             ->image()
                             ->disk('public')
                             ->directory('services')
@@ -140,6 +152,13 @@ class ServiceResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('image')
+                    ->label('Services page image')
+                    ->disk('public')
+                    ->visibility('public')
+                    ->imageHeight(56)
+                    ->square(),
+                ImageColumn::make('detail_image')
+                    ->label('Detail image')
                     ->disk('public')
                     ->visibility('public')
                     ->imageHeight(56)

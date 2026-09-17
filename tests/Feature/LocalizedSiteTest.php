@@ -74,9 +74,25 @@ test('service and certificate images render from public storage', function (): v
     expect($service->image)->toStartWith('services/');
     expect($certificate->image)->toStartWith('certificates/');
 
+    $service->update([
+        'image' => 'services/list-page-test.jpg',
+        'detail_image' => 'services/detail-page-test.jpg',
+    ]);
+
+    $this->get(route('en.services.index'))
+        ->assertOk()
+        ->assertSee('storage/services/list-page-test.jpg', false);
+
     $this->get(route('en.services.show', ['serviceSlug' => $service->getTranslation('slug', 'en')]))
         ->assertOk()
-        ->assertSee('storage/'.ltrim((string) $service->image, '/'), false);
+        ->assertSee('storage/services/detail-page-test.jpg', false)
+        ->assertDontSee('storage/services/list-page-test.jpg', false);
+
+    $service->update(['detail_image' => null]);
+
+    $this->get(route('en.services.show', ['serviceSlug' => $service->getTranslation('slug', 'en')]))
+        ->assertOk()
+        ->assertSee('storage/services/list-page-test.jpg', false);
 
     $this->get('/en')
         ->assertOk()

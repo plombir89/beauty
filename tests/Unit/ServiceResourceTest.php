@@ -1,6 +1,7 @@
 <?php
 
 use App\Filament\Resources\Services\ServiceResource;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Schemas\Schema;
 use Tests\TestCase;
@@ -15,6 +16,25 @@ test('service rich editor stores attachments on public services storage', functi
     expect($editor)->toBeInstanceOf(RichEditor::class)
         ->and($editor->getFileAttachmentsDiskName())->toBe('public')
         ->and($editor->getFileAttachmentsDirectory())->toBe('services/content');
+});
+
+test('service image uploads use public services storage', function (): void {
+    $schema = ServiceResource::form(Schema::make());
+    $uploads = collect(serviceResourceTestFlattenComponents($schema->getComponents()))
+        ->filter(fn (object $component): bool => $component instanceof FileUpload)
+        ->keyBy(fn (FileUpload $upload): string => $upload->getName());
+
+    $servicesPageImage = $uploads->get('image');
+    $detailImage = $uploads->get('detail_image');
+
+    expect($servicesPageImage)->toBeInstanceOf(FileUpload::class)
+        ->and($servicesPageImage->getDiskName())->toBe('public')
+        ->and($servicesPageImage->getDirectory())->toBe('services')
+        ->and($servicesPageImage->getVisibility())->toBe('public')
+        ->and($detailImage)->toBeInstanceOf(FileUpload::class)
+        ->and($detailImage->getDiskName())->toBe('public')
+        ->and($detailImage->getDirectory())->toBe('services')
+        ->and($detailImage->getVisibility())->toBe('public');
 });
 
 /**

@@ -76,16 +76,18 @@ class ServiceController extends Controller
             ->active()
             ->whereJsonContainsLocale('slug', $locale, $serviceSlug)
             ->firstOrFail();
+        $detailImage = $service->detail_image ?: $service->image;
 
         Seo::set(
             title: $service->title,
             description: $service->summary,
             alternates: LocalizedRoutes::serviceAlternates($service),
-            image: $service->image ? asset('storage/'.ltrim($service->image, '/')) : null,
+            image: $detailImage,
         );
 
         return view('pages.services.show', [
             'service' => $service,
+            'detailImage' => $detailImage,
             'relatedServices' => Service::query()
                 ->with(['category', 'prices'])
                 ->active()
